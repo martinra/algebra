@@ -62,33 +62,6 @@ module Numeric.Algebra
   , RightModule(..)
   , Module
 
-  -- * CombinatorialFreeAlgebras
-  -- ** associative algebras over (non-commutative) semirings 
-  , CombinatorialFreeAlgebra(..)
-  , CombinatorialFreeCoalgebra(..)
-  -- ** unital algebras
-  , UnitalCombinatorialFreeAlgebra(..)
-  , CounitalCombinatorialFreeCoalgebra(..)
-  , CombinatorialFreeBialgebra
-  -- ** involutive algebras
-  , InvolutiveCombinatorialFreeAlgebra(..)
-  , InvolutiveCombinatorialFreeCoalgebra(..)
-  , InvolutiveCombinatorialFreeBialgebra
-  , TriviallyInvolutiveCombinatorialFreeAlgebra
-  , TriviallyInvolutiveCombinatorialFreeCoalgebra
-  , TriviallyInvolutiveCombinatorialFreeBialgebra
-  -- ** idempotent algebras
-  , IdempotentCombinatorialFreeAlgebra
-  , IdempotentCombinatorialFreeBialgebra
-  -- ** commutative algebras
-  , CommutativeCombinatorialFreeAlgebra
-  , CommutativeCombinatorialFreeBialgebra
-  , CocommutativeCombinatorialFreeCoalgebra
-  -- ** division algebras
-  , DivisionCombinatorialFreeAlgebra(..)
-  -- ** Hopf alegebras
-  , HopfCombinatorialFreeAlgebra(..)
-
   -- * Ring Properties
   -- ** Characteristic
   , Characteristic(..)
@@ -112,14 +85,6 @@ module Numeric.Algebra
   , zeroRep, sinnumRep
   -- * Representable Group
   , negateRep, minusRep, subtractRep, timesRep
-  -- * Representable Multiplicative (via CombinatorialFreeAlgebra)
-  , mulRep
-  -- * Representable Unital (via UnitalCombinatorialFreeAlgebra)
-  , oneRep
-  -- * Representable Rig (via CombinatorialFreeAlgebra)
-  , fromNaturalRep
-  -- * Representable Ring (via CombinatorialFreeAlgebra)
-  , fromIntegerRep
   
   -- * Norm
   , Quadrance(..)
@@ -147,7 +112,6 @@ import Numeric.Algebra.Commutative
 import Numeric.Algebra.Division
 import Numeric.Algebra.Factorable
 import Numeric.Algebra.Unital
-import Numeric.Algebra.Hopf
 import Numeric.Covector
 import Numeric.Decidable.Units
 import Numeric.Decidable.Associates

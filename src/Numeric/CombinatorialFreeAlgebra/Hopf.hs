@@ -1,5 +1,5 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances #-}
-module Numeric.Algebra.Hopf
+module Numeric.CombinatorialFreeAlgebra.Hopf
   ( HopfCombinatorialFreeAlgebra(..)
   ) where
 
