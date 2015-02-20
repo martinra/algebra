@@ -6,7 +6,7 @@ module Numeric.Algebra.Idempotent
   -- * Idempotent algebras
   , IdempotentCombinatorialFreeAlgebra
   , IdempotentCombinatorialFreeCoalgebra
-  , IdempotentBialgebra
+  , IdempotentCombinatorialFreeBialgebra
   ) where
 
 import Numeric.Algebra.Class
@@ -55,5 +55,5 @@ instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeC
 instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeCoalgebra r b, IdempotentCombinatorialFreeCoalgebra r c, IdempotentCombinatorialFreeCoalgebra r d, IdempotentCombinatorialFreeCoalgebra r e) => IdempotentCombinatorialFreeCoalgebra r (a,b,c,d,e)
 
 -- idempotent bialgebra
-class (Bialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentBialgebra r h 
-instance (Bialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentBialgebra r h 
+class (CombinatorialFreeBialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentCombinatorialFreeBialgebra r h 
+instance (CombinatorialFreeBialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentCombinatorialFreeBialgebra r h 

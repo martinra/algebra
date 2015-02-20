@@ -7,12 +7,12 @@ module Numeric.Algebra.Involutive
   -- * Involutive CombinatorialFreeAlgebras
   , InvolutiveCombinatorialFreeAlgebra(..)
   , InvolutiveCombinatorialFreeCoalgebra(..)
-  , InvolutiveBialgebra
+  , InvolutiveCombinatorialFreeBialgebra
   -- * Trivial Involution
   , TriviallyInvolutive
   , TriviallyInvolutiveCombinatorialFreeAlgebra
   , TriviallyInvolutiveCombinatorialFreeCoalgebra
-  , TriviallyInvolutiveBialgebra
+  , TriviallyInvolutiveCombinatorialFreeBialgebra
   ) where
 
 import Data.Int
@@ -337,24 +337,24 @@ instance ( TriviallyInvolutiveCombinatorialFreeCoalgebra r a
 
 
 
-class ( Bialgebra r h
+class ( CombinatorialFreeBialgebra r h
       , InvolutiveCombinatorialFreeAlgebra r h
       , InvolutiveCombinatorialFreeCoalgebra r h
-      ) => InvolutiveBialgebra r h
+      ) => InvolutiveCombinatorialFreeBialgebra r h
 
-instance ( Bialgebra r h
+instance ( CombinatorialFreeBialgebra r h
          , InvolutiveCombinatorialFreeAlgebra r h
          , InvolutiveCombinatorialFreeCoalgebra r h
-         ) => InvolutiveBialgebra r h
+         ) => InvolutiveCombinatorialFreeBialgebra r h
 
 
 
-class ( InvolutiveBialgebra r h
+class ( InvolutiveCombinatorialFreeBialgebra r h
       , TriviallyInvolutiveCombinatorialFreeAlgebra r h
       , TriviallyInvolutiveCombinatorialFreeCoalgebra r h
-      ) => TriviallyInvolutiveBialgebra r h
+      ) => TriviallyInvolutiveCombinatorialFreeBialgebra r h
 
-instance ( InvolutiveBialgebra r h
+instance ( InvolutiveCombinatorialFreeBialgebra r h
          , TriviallyInvolutiveCombinatorialFreeAlgebra r h
          , TriviallyInvolutiveCombinatorialFreeCoalgebra r h
-         ) => TriviallyInvolutiveBialgebra r h
+         ) => TriviallyInvolutiveCombinatorialFreeBialgebra r h

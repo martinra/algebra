@@ -47,7 +47,7 @@ instance (Commutative r, Semiring r, Partitionable m, Abelian m) => CommutativeC
 
 instance (IdempotentSemiring r, Partitionable m, Idempotent m) => IdempotentCombinatorialFreeAlgebra r (GroupBasis m)
 
-instance (Monoidal r, Semiring r, Eq m, Partitionable m, DecidableZero m) => Bialgebra r (GroupBasis m) where
+instance (Monoidal r, Semiring r, Eq m, Partitionable m, DecidableZero m) => CombinatorialFreeBialgebra r (GroupBasis m) where
 
 instance (Group r, Semiring r, Eq m, Partitionable m, DecidableZero m) => HopfCombinatorialFreeAlgebra r (GroupBasis m) where
   antipode f m = f (negate m)

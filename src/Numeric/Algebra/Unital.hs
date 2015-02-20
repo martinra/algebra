@@ -8,8 +8,8 @@ module Numeric.Algebra.Unital
   , UnitalCombinatorialFreeAlgebra(..)
   -- * Unital Coassociative CombinatorialFreeCoalgebra
   , CounitalCombinatorialFreeCoalgebra(..)
-  -- * Bialgebra
-  , Bialgebra
+  -- * CombinatorialFreeBialgebra
+  , CombinatorialFreeBialgebra
   ) where
 
 import Numeric.Algebra.Class
@@ -140,18 +140,18 @@ instance Semiring r => CounitalCombinatorialFreeCoalgebra r (Seq a) where
 -- 'mult' and 'unit' are a coalgebra homomorphisms or (equivalently) that 
 -- 'comult' and 'counit' are an algebra homomorphisms.
 
-class (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r a) => Bialgebra r a
+class (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r a) => CombinatorialFreeBialgebra r a
 
 -- TODO
--- instance (Unital r, Bialgebra r m) => Bialgebra r (m -> r)
--- instance Bialgebra () c
--- instance (UnitalCombinatorialFreeAlgebra r b, Bialgebra r c) => Bialgebra (b -> r) c
+-- instance (Unital r, CombinatorialFreeBialgebra r m) => CombinatorialFreeBialgebra r (m -> r)
+-- instance CombinatorialFreeBialgebra () c
+-- instance (UnitalCombinatorialFreeAlgebra r b, CombinatorialFreeBialgebra r c) => CombinatorialFreeBialgebra (b -> r) c
 
-instance Semiring r => Bialgebra r ()
-instance (Bialgebra r a, Bialgebra r b) => Bialgebra r (a, b)
-instance (Bialgebra r a, Bialgebra r b, Bialgebra r c) => Bialgebra r (a, b, c)
-instance (Bialgebra r a, Bialgebra r b, Bialgebra r c, Bialgebra r d) => Bialgebra r (a, b, c, d)
-instance (Bialgebra r a, Bialgebra r b, Bialgebra r c, Bialgebra r d, Bialgebra r e) => Bialgebra r (a, b, c, d, e)
+instance Semiring r => CombinatorialFreeBialgebra r ()
+instance (CombinatorialFreeBialgebra r a, CombinatorialFreeBialgebra r b) => CombinatorialFreeBialgebra r (a, b)
+instance (CombinatorialFreeBialgebra r a, CombinatorialFreeBialgebra r b, CombinatorialFreeBialgebra r c) => CombinatorialFreeBialgebra r (a, b, c)
+instance (CombinatorialFreeBialgebra r a, CombinatorialFreeBialgebra r b, CombinatorialFreeBialgebra r c, CombinatorialFreeBialgebra r d) => CombinatorialFreeBialgebra r (a, b, c, d)
+instance (CombinatorialFreeBialgebra r a, CombinatorialFreeBialgebra r b, CombinatorialFreeBialgebra r c, CombinatorialFreeBialgebra r d, CombinatorialFreeBialgebra r e) => CombinatorialFreeBialgebra r (a, b, c, d, e)
 
-instance (Monoidal r, Semiring r) => Bialgebra r [a]
-instance (Monoidal r, Semiring r) => Bialgebra r (Seq a)
+instance (Monoidal r, Semiring r) => CombinatorialFreeBialgebra r [a]
+instance (Monoidal r, Semiring r) => CombinatorialFreeBialgebra r (Seq a)

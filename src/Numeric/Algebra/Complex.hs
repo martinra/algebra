@@ -153,7 +153,7 @@ instance Rng k => CombinatorialFreeCoalgebra k ComplexBasis where
 instance Rng k => CounitalCombinatorialFreeCoalgebra k ComplexBasis where
   counit f = f E + f I
 
-instance Rng k => Bialgebra k ComplexBasis 
+instance Rng k => CombinatorialFreeBialgebra k ComplexBasis 
 
 instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k ComplexBasis where
   inv f = f' where

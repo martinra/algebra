@@ -69,20 +69,20 @@ module Numeric.Algebra
   -- ** unital algebras
   , UnitalCombinatorialFreeAlgebra(..)
   , CounitalCombinatorialFreeCoalgebra(..)
-  , Bialgebra
+  , CombinatorialFreeBialgebra
   -- ** involutive algebras
   , InvolutiveCombinatorialFreeAlgebra(..)
   , InvolutiveCombinatorialFreeCoalgebra(..)
-  , InvolutiveBialgebra
+  , InvolutiveCombinatorialFreeBialgebra
   , TriviallyInvolutiveCombinatorialFreeAlgebra
   , TriviallyInvolutiveCombinatorialFreeCoalgebra
-  , TriviallyInvolutiveBialgebra
+  , TriviallyInvolutiveCombinatorialFreeBialgebra
   -- ** idempotent algebras
   , IdempotentCombinatorialFreeAlgebra
-  , IdempotentBialgebra
+  , IdempotentCombinatorialFreeBialgebra
   -- ** commutative algebras
   , CommutativeCombinatorialFreeAlgebra
-  , CommutativeBialgebra
+  , CommutativeCombinatorialFreeBialgebra
   , CocommutativeCombinatorialFreeCoalgebra
   -- ** division algebras
   , DivisionCombinatorialFreeAlgebra(..)

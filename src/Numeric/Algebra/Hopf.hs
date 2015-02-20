@@ -7,9 +7,9 @@ import Numeric.Algebra.Unital
 
 -- | A HopfCombinatorialFreeAlgebra algebra on a semiring, where the module is free.
 --
--- When @antipode . antipode = id@ and antipode is an antihomomorphism then we are an InvolutiveBialgebra with @inv = antipode@ as well
+-- When @antipode . antipode = id@ and antipode is an antihomomorphism then we are an InvolutiveCombinatorialFreeBialgebra with @inv = antipode@ as well
 
-class Bialgebra r h => HopfCombinatorialFreeAlgebra r h where
+class CombinatorialFreeBialgebra r h => HopfCombinatorialFreeAlgebra r h where
   -- > convolve id antipode = convolve antipode id = unit . counit
   antipode :: (h -> r) -> h -> r
 

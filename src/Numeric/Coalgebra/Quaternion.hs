@@ -203,7 +203,7 @@ instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r Quaterni
 instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis' where
   counit f = f E'
 
-instance (TriviallyInvolutive r, Rng r)  => Bialgebra r QuaternionBasis'
+instance (TriviallyInvolutive r, Rng r)  => CombinatorialFreeBialgebra r QuaternionBasis'
 
 instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r)  => InvolutiveCombinatorialFreeAlgebra r QuaternionBasis' where
   inv f E' = f E'

@@ -159,7 +159,7 @@ instance (Commutative k, Rng k) => CombinatorialFreeCoalgebra k TrigBasis where
      f' Cos Sin = fs
      f' Cos Cos = fc
 
-instance (Commutative k, Rng k) => Bialgebra k TrigBasis
+instance (Commutative k, Rng k) => CombinatorialFreeBialgebra k TrigBasis
 
 instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeAlgebra k TrigBasis where
   inv f = f' where

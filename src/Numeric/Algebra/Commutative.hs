@@ -3,7 +3,7 @@ module Numeric.Algebra.Commutative
   ( Commutative
   , CommutativeCombinatorialFreeAlgebra
   , CocommutativeCombinatorialFreeCoalgebra
-  , CommutativeBialgebra
+  , CommutativeCombinatorialFreeBialgebra
   ) where
 
 import Data.Int
@@ -165,12 +165,12 @@ instance ( Commutative r
 
 
 
-class ( Bialgebra r h
+class ( CombinatorialFreeBialgebra r h
       , CommutativeCombinatorialFreeAlgebra r h
       , CocommutativeCombinatorialFreeCoalgebra r h
-      ) => CommutativeBialgebra r h
+      ) => CommutativeCombinatorialFreeBialgebra r h
 
-instance ( Bialgebra r h
+instance ( CombinatorialFreeBialgebra r h
          , CommutativeCombinatorialFreeAlgebra r h
          , CocommutativeCombinatorialFreeCoalgebra r h
-         ) => CommutativeBialgebra r h
+         ) => CommutativeCombinatorialFreeBialgebra r h

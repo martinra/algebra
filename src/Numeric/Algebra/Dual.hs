@@ -139,7 +139,7 @@ instance Rng k => CombinatorialFreeCoalgebra k DualBasis where
 instance Rng k => CounitalCombinatorialFreeCoalgebra k DualBasis where
   counit f = f E + f D
 
-instance Rng k => Bialgebra k DualBasis 
+instance Rng k => CombinatorialFreeBialgebra k DualBasis 
 
 instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k DualBasis where
   inv f = f' where

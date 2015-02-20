@@ -135,7 +135,7 @@ instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeCoalgebra k
 instance (Commutative k, Monoidal k, Semiring k) => CounitalCombinatorialFreeCoalgebra k HyperBasis' where
   counit f = f Cosh' + f Sinh'
 
-instance (Commutative k, Monoidal k, Semiring k) => Bialgebra k HyperBasis'
+instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeBialgebra k HyperBasis'
 
 instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeAlgebra k HyperBasis' where
   inv f = f' where
