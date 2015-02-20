@@ -1,14 +1,15 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, UndecidableInstances #-}
 module Numeric.CombinatorialFreeAlgebra.Idempotent 
   ( -- * Idempotent algebras
-  , IdempotentCombinatorialFreeAlgebra
+    IdempotentCombinatorialFreeAlgebra
   , IdempotentCombinatorialFreeCoalgebra
   , IdempotentCombinatorialFreeBialgebra
   ) where
 
 import Numeric.Algebra.Class
-import Numeric.Algebra.Unital
-import Numeric.Natural
+import Numeric.Algebra.Idempotent
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
 import Data.Set (Set)
 import Data.IntSet (IntSet)
 

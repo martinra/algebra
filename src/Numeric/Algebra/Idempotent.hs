@@ -8,8 +8,6 @@ module Numeric.Algebra.Idempotent
 import Numeric.Algebra.Class
 import Numeric.Algebra.Unital
 import Numeric.Natural
-import Data.Set (Set)
-import Data.IntSet (IntSet)
 
 -- | An multiplicative semigroup with idempotent multiplication.
 --

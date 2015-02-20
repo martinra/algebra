@@ -1,7 +1,6 @@
 module Numeric.CombinatorialFreeAlgebra
-  ( 
-  -- ** associative algebras over (non-commutative) semirings 
-  , CombinatorialFreeAlgebra(..)
+  ( -- ** associative algebras over (non-commutative) semirings 
+    CombinatorialFreeAlgebra(..)
   , CombinatorialFreeCoalgebra(..)
   -- ** unital algebras
   , UnitalCombinatorialFreeAlgebra(..)

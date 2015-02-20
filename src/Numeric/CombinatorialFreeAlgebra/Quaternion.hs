@@ -29,8 +29,9 @@ import Data.Semigroup.Traversable
 import Data.Semigroup.Foldable
 import Numeric.Algebra
 import Numeric.Algebra.Distinguished.Class
-import Numeric.Algebra.Complex.Class
-import Numeric.Algebra.Quaternion.Class
+import Numeric.CombinatorialFreeAlgebra
+import Numeric.CombinatorialFreeAlgebra.Complex.Class
+import Numeric.CombinatorialFreeAlgebra.Quaternion.Class
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger)
 
 instance Distinguished QuaternionBasis where

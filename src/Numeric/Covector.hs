@@ -17,9 +17,12 @@ import Numeric.Additive.Group
 import Numeric.Algebra.Class
 import Numeric.Algebra.Unital
 import Numeric.Algebra.Idempotent
-import Numeric.Algebra.Involutive
 import Numeric.Algebra.Commutative
-import Numeric.Algebra.Hopf
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
+import Numeric.CombinatorialFreeAlgebra.Idempotent
+import Numeric.CombinatorialFreeAlgebra.Involutive
+import Numeric.CombinatorialFreeAlgebra.Hopf
 import Numeric.Rig.Class
 import Numeric.Ring.Class
 import Control.Applicative

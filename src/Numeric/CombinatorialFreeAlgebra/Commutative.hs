@@ -5,17 +5,16 @@ module Numeric.CombinatorialFreeAlgebra.Commutative
   , CommutativeCombinatorialFreeBialgebra
   ) where
 
-import Data.Int
 import Data.IntSet (IntSet)
 import Data.IntMap (IntMap)
 import Data.Set (Set)
 import Data.Map (Map)
-import Data.Word
 import Numeric.Additive.Class
 import Numeric.Algebra.Class
-import Numeric.Algebra.Unital
-import Numeric.Natural
-import Prelude (Bool, Ord, Integer)
+import Numeric.Algebra.Commutative
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
+import Prelude (Ord)
 
 
 instance CommutativeCombinatorialFreeAlgebra r a => Commutative (a -> r)

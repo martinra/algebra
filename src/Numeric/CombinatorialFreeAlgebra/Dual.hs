@@ -20,7 +20,8 @@ import Data.Semigroup.Foldable
 import Data.Traversable
 import Numeric.Algebra
 import Numeric.Algebra.Distinguished.Class
-import Numeric.Algebra.Dual.Class
+import Numeric.CombinatorialFreeAlgebra
+import Numeric.CombinatorialFreeAlgebra.Dual.Class
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger,recip)
 
 -- | dual number basis, D^2 = 0. D /= 0.

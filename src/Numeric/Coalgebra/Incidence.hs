@@ -14,6 +14,8 @@ import Data.Data
 import Numeric.Algebra.Class
 import Numeric.Algebra.Unital
 import Numeric.Algebra.Commutative
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
 import Numeric.Ring.Class
 import Numeric.Order.LocallyFinite
 

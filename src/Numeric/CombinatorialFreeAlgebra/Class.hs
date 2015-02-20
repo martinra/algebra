@@ -1,32 +1,25 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, FlexibleContexts, UndecidableInstances, TypeOperators #-}
 module Numeric.CombinatorialFreeAlgebra.Class 
-  (
-  -- * Associative algebras
-  , CombinatorialFreeAlgebra(..)
+  ( -- * Associative algebras
+    CombinatorialFreeAlgebra(..)
   -- * Coassociative coalgebras
   , CombinatorialFreeCoalgebra(..)
   ) where
 
-import Data.Foldable hiding (sum, concat)
-import Data.Int
 import Data.IntMap (IntMap)
 import Data.IntSet (IntSet)
 import Data.Map (Map)
-import Data.Monoid (mappend)
 -- import Data.Semigroup.Foldable
 import Data.Sequence hiding (reverse,index)
-import Data.Semigroup.Foldable
 import Data.Set (Set)
-import Data.Word
+import Numeric.Algebra.Class
 import Numeric.Additive.Class
-import Numeric.Natural
 import Prelude hiding ((*), (+), negate, subtract,(-), recip, (/), foldr, sum, product, replicate, concat)
 import qualified Data.IntMap as IntMap
 import qualified Data.IntSet as IntSet
 import qualified Data.Map as Map
 import qualified Data.Sequence as Seq
 import qualified Data.Set as Set
-import qualified Prelude
 
 -- | An associative algebra built with a free module over a semiring
 class Semiring r => CombinatorialFreeAlgebra r a where

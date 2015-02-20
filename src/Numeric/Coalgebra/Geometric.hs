@@ -44,6 +44,7 @@ import Data.Data
 import Data.Ix
 import Data.Array.Unboxed
 import Numeric.Algebra
+import Numeric.CombinatorialFreeAlgebra
 import Prelude hiding ((-),(*),(+),negate,reverse)
 
 -- a basis vector for a simple geometric coalgebra with the Euclidean inner product

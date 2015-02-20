@@ -19,23 +19,12 @@ module Numeric.Algebra.Class
 
 import Data.Foldable hiding (sum, concat)
 import Data.Int
-import Data.IntMap (IntMap)
-import Data.IntSet (IntSet)
-import Data.Map (Map)
-import Data.Monoid (mappend)
 -- import Data.Semigroup.Foldable
-import Data.Sequence hiding (reverse,index)
 import Data.Semigroup.Foldable
-import Data.Set (Set)
 import Data.Word
 import Numeric.Additive.Class
 import Numeric.Natural
 import Prelude hiding ((*), (+), negate, subtract,(-), recip, (/), foldr, sum, product, replicate, concat)
-import qualified Data.IntMap as IntMap
-import qualified Data.IntSet as IntSet
-import qualified Data.Map as Map
-import qualified Data.Sequence as Seq
-import qualified Data.Set as Set
 import qualified Prelude
 
 infixr 8 `pow1p`

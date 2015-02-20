@@ -78,8 +78,7 @@ module Numeric.Algebra
 
   -- * Natural numbers
   , Natural
-
-  -- * Representable Additive
+-- * Representable Additive
   , addRep, sinnum1pRep
   -- * Representable Monoidal
   , zeroRep, sinnumRep

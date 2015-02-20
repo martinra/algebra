@@ -23,6 +23,7 @@ import Data.Functor.Plus hiding (zero)
 import qualified Data.Functor.Plus as Plus
 import Data.Semigroupoid
 import Numeric.Algebra
+import Numeric.CombinatorialFreeAlgebra
 import Prelude hiding ((*), (+), negate, subtract,(-), recip, (/), foldr, sum, product, replicate, concat, (.), id, fst, snd)
 
 -- | linear maps from elements of a free module to another free module over r

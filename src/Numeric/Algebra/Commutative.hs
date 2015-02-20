@@ -4,16 +4,10 @@ module Numeric.Algebra.Commutative
   ) where
 
 import Data.Int
-import Data.IntSet (IntSet)
-import Data.IntMap (IntMap)
-import Data.Set (Set)
-import Data.Map (Map)
 import Data.Word
-import Numeric.Additive.Class
 import Numeric.Algebra.Class
-import Numeric.Algebra.Unital
 import Numeric.Natural
-import Prelude (Bool, Ord, Integer)
+import Prelude (Bool, Integer)
 
 
 

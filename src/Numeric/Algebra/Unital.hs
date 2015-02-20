@@ -8,8 +8,6 @@ module Numeric.Algebra.Unital
 
 import Numeric.Algebra.Class
 import Numeric.Natural
-import Data.Sequence (Seq)
-import qualified Data.Sequence as Seq
 import Data.Foldable hiding (product)
 import Data.Int
 import Data.Word

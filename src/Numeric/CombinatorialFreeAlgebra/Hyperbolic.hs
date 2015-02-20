@@ -19,6 +19,7 @@ import Data.Semigroup
 import Data.Traversable
 import Numeric.Algebra
 import Numeric.Coalgebra.Hyperbolic.Class
+import Numeric.CombinatorialFreeAlgebra
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger)
 
 -- the dual hyperbolic basis

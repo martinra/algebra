@@ -25,7 +25,8 @@ import Data.Traversable
 import Numeric.Algebra
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger, sin, cos)
 import Numeric.Algebra.Distinguished.Class
-import Numeric.Algebra.Complex.Class
+import Numeric.CombinatorialFreeAlgebra
+import Numeric.CombinatorialFreeAlgebra.Complex.Class
 import Numeric.Coalgebra.Trigonometric.Class
 
 -- the dual complex basis

@@ -1,8 +1,7 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances #-}
 module Numeric.CombinatorialFreeAlgebra.Unital
-  ( 
-  -- * Unital Associative CombinatorialFreeAlgebra 
-  , UnitalCombinatorialFreeAlgebra(..)
+  ( -- * Unital Associative CombinatorialFreeAlgebra 
+   UnitalCombinatorialFreeAlgebra(..)
   -- * Unital Coassociative CombinatorialFreeCoalgebra
   , CounitalCombinatorialFreeCoalgebra(..)
   -- * CombinatorialFreeBialgebra
@@ -10,12 +9,10 @@ module Numeric.CombinatorialFreeAlgebra.Unital
   ) where
 
 import Numeric.Algebra.Class
-import Numeric.Natural
+import Numeric.Algebra.Unital
+import Numeric.CombinatorialFreeAlgebra.Class
 import Data.Sequence (Seq)
 import qualified Data.Sequence as Seq
-import Data.Foldable hiding (product)
-import Data.Int
-import Data.Word
 import Prelude hiding ((*), foldr, product)
 
 

@@ -4,8 +4,9 @@ module Numeric.CombinatorialFreeAlgebra.Division
   ) where
 
 import Prelude hiding ((*), recip, (/),(^))
-import Numeric.Algebra.Class
+import Numeric.Algebra.Division
 import Numeric.Algebra.Unital
+import Numeric.CombinatorialFreeAlgebra.Unital
 
 
 class UnitalCombinatorialFreeAlgebra r a => DivisionCombinatorialFreeAlgebra r a where

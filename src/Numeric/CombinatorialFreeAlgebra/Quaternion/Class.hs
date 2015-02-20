@@ -2,7 +2,7 @@ module Numeric.CombinatorialFreeAlgebra.Quaternion.Class
   ( Hamiltonian(..)
   ) where
 
-import Numeric.Algebra.Complex.Class
+import Numeric.CombinatorialFreeAlgebra.Complex.Class
 import Numeric.Covector
 
 class Complicated t => Hamiltonian t where

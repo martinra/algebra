@@ -1,8 +1,7 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances, UndecidableInstances, TypeOperators #-}
 module Numeric.CombinatorialFreeAlgebra.Involutive
-  ( 
-  -- * Involutive CombinatorialFreeAlgebras
-  , InvolutiveCombinatorialFreeAlgebra(..)
+  ( -- * Involutive CombinatorialFreeAlgebras
+    InvolutiveCombinatorialFreeAlgebra(..)
   , InvolutiveCombinatorialFreeCoalgebra(..)
   , InvolutiveCombinatorialFreeBialgebra
   -- * Trivial Involution
@@ -11,12 +10,11 @@ module Numeric.CombinatorialFreeAlgebra.Involutive
   , TriviallyInvolutiveCombinatorialFreeBialgebra
   ) where
 
-import Data.Int
-import Data.Word
-import Numeric.Algebra.Class
-import Numeric.Algebra.Commutative
-import Numeric.Algebra.Unital
-import Numeric.Natural
+import Numeric.Algebra.Involutive
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Commutative
+import Numeric.CombinatorialFreeAlgebra.Unital
+
 
 -- inv is an associative algebra homomorphism
 class (InvolutiveSemiring r, CombinatorialFreeAlgebra r a) => InvolutiveCombinatorialFreeAlgebra r a where

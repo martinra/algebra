@@ -6,6 +6,7 @@ module Numeric.Log
 import Data.Function (on)
 import Numeric.Algebra
 
+
 import Prelude hiding ((*),(^),(/),recip,negate,subtract)
 
 newtype Log r = Log { runLog :: r } 

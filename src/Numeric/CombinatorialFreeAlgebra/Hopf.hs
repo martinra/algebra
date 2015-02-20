@@ -3,7 +3,8 @@ module Numeric.CombinatorialFreeAlgebra.Hopf
   ( HopfCombinatorialFreeAlgebra(..)
   ) where
 
-import Numeric.Algebra.Unital
+import Numeric.CombinatorialFreeAlgebra.Unital
+
 
 -- | A HopfCombinatorialFreeAlgebra algebra on a semiring, where the module is free.
 --

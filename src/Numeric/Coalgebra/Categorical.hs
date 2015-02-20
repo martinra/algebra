@@ -8,8 +8,10 @@ import Numeric.Partial.Semigroup
 import Numeric.Partial.Monoid
 import Numeric.Partial.Group
 import Numeric.Algebra.Class
-import Numeric.Algebra.Unital
 import Numeric.Algebra.Commutative
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
+
 
 -- the dual categorical algebra
 newtype Morphism a = Morphism a deriving (Eq,Ord,Show,Read,PartialSemigroup,PartialMonoid,PartialGroup,Data,Typeable)

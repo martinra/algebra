@@ -24,6 +24,8 @@ import Numeric.Additive.Class
 import Numeric.Additive.Group
 import Numeric.Algebra.Class
 import Numeric.Algebra.Unital
+import Numeric.CombinatorialFreeAlgebra.Class
+import Numeric.CombinatorialFreeAlgebra.Unital
 import Numeric.Natural
 import Numeric.Rig.Class
 import Numeric.Ring.Class

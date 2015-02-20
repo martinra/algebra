@@ -12,7 +12,6 @@ import Data.Int
 import Data.Word
 import Numeric.Algebra.Class
 import Numeric.Algebra.Commutative
-import Numeric.Algebra.Unital
 import Numeric.Natural
 
 -- | An semigroup with involution
