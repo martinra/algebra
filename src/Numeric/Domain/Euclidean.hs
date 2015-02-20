@@ -66,6 +66,12 @@ class (Ring r, DecidableZero r, DecidableUnits r, Domain r) => Euclidean r where
               t''       = (t - q * t') * u
           in step ((r'', s'', t'') : acc)
       step _ = P.error "cannot happen!"
+
+  -- | Extended greatest common divisor.
+  --
+  -- prop> xgcd f g == (r,s,t) ==> r == f * s + g * t
+  xgcd :: r -> r -> (r,r,r)
+  xgcd f g = P.head $ euclid f g
 #if (__GLASGOW_HASKELL__ > 708)
   {-# MINIMAL splitUnit, degree, divide #-}
 #endif
