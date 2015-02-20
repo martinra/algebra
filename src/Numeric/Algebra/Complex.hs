@@ -133,39 +133,39 @@ instance Partitionable r => Partitionable (Complex r) where
     partitionWith (\a1 a2 -> 
     partitionWith (\b1 b2 -> f (Complex a1 b1) (Complex a2 b2)) b) a
 
-instance Rng k => Algebra k ComplexBasis where
+instance Rng k => CombinatorialFreeAlgebra k ComplexBasis where
   mult f = f' where
     fe = f E E - f I I
     fi = f E I + f I E
     f' E = fe
     f' I = fi
 
-instance Rng k => UnitalAlgebra k ComplexBasis where
+instance Rng k => UnitalCombinatorialFreeAlgebra k ComplexBasis where
   unit x E = x
   unit _ _ = zero
 
 -- the trivial coalgebra
-instance Rng k => Coalgebra k ComplexBasis where
+instance Rng k => CombinatorialFreeCoalgebra k ComplexBasis where
   comult f E E = f E
   comult f I I = f I
   comult _ _ _ = zero
 
-instance Rng k => CounitalCoalgebra k ComplexBasis where
+instance Rng k => CounitalCombinatorialFreeCoalgebra k ComplexBasis where
   counit f = f E + f I
 
 instance Rng k => Bialgebra k ComplexBasis 
 
-instance (InvolutiveSemiring k, Rng k) => InvolutiveAlgebra k ComplexBasis where
+instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k ComplexBasis where
   inv f = f' where
     afe = adjoint (f E)
     nfi = negate (f I)
     f' E = afe
     f' I = nfi
 
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCoalgebra k ComplexBasis where
+instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeCoalgebra k ComplexBasis where
   coinv = inv
 
-instance (InvolutiveSemiring k, Rng k) => HopfAlgebra k ComplexBasis where
+instance (InvolutiveSemiring k, Rng k) => HopfCombinatorialFreeAlgebra k ComplexBasis where
   antipode = inv
 
 instance (Commutative r, Rng r) => Multiplicative (Complex r) where

@@ -62,32 +62,32 @@ module Numeric.Algebra
   , RightModule(..)
   , Module
 
-  -- * Algebras
+  -- * CombinatorialFreeAlgebras
   -- ** associative algebras over (non-commutative) semirings 
-  , Algebra(..)
-  , Coalgebra(..)
+  , CombinatorialFreeAlgebra(..)
+  , CombinatorialFreeCoalgebra(..)
   -- ** unital algebras
-  , UnitalAlgebra(..)
-  , CounitalCoalgebra(..)
+  , UnitalCombinatorialFreeAlgebra(..)
+  , CounitalCombinatorialFreeCoalgebra(..)
   , Bialgebra
   -- ** involutive algebras
-  , InvolutiveAlgebra(..)
-  , InvolutiveCoalgebra(..)
+  , InvolutiveCombinatorialFreeAlgebra(..)
+  , InvolutiveCombinatorialFreeCoalgebra(..)
   , InvolutiveBialgebra
-  , TriviallyInvolutiveAlgebra
-  , TriviallyInvolutiveCoalgebra
+  , TriviallyInvolutiveCombinatorialFreeAlgebra
+  , TriviallyInvolutiveCombinatorialFreeCoalgebra
   , TriviallyInvolutiveBialgebra
   -- ** idempotent algebras
-  , IdempotentAlgebra
+  , IdempotentCombinatorialFreeAlgebra
   , IdempotentBialgebra
   -- ** commutative algebras
-  , CommutativeAlgebra
+  , CommutativeCombinatorialFreeAlgebra
   , CommutativeBialgebra
-  , CocommutativeCoalgebra
+  , CocommutativeCombinatorialFreeCoalgebra
   -- ** division algebras
-  , DivisionAlgebra(..)
+  , DivisionCombinatorialFreeAlgebra(..)
   -- ** Hopf alegebras
-  , HopfAlgebra(..)
+  , HopfCombinatorialFreeAlgebra(..)
 
   -- * Ring Properties
   -- ** Characteristic
@@ -112,13 +112,13 @@ module Numeric.Algebra
   , zeroRep, sinnumRep
   -- * Representable Group
   , negateRep, minusRep, subtractRep, timesRep
-  -- * Representable Multiplicative (via Algebra)
+  -- * Representable Multiplicative (via CombinatorialFreeAlgebra)
   , mulRep
-  -- * Representable Unital (via UnitalAlgebra)
+  -- * Representable Unital (via UnitalCombinatorialFreeAlgebra)
   , oneRep
-  -- * Representable Rig (via Algebra)
+  -- * Representable Rig (via CombinatorialFreeAlgebra)
   , fromNaturalRep
-  -- * Representable Ring (via Algebra)
+  -- * Representable Ring (via CombinatorialFreeAlgebra)
   , fromIntegerRep
   
   -- * Norm

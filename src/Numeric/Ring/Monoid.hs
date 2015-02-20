@@ -24,25 +24,25 @@ instance HasTrie m => HasTrie (Mon m) where
   embedKey = embedKey . runMon
   projectKey = Mon . projectKey
 
-instance (Semiring r, Additive m) => Coalgebra r (Mon m) where
+instance (Semiring r, Additive m) => CombinatorialFreeCoalgebra r (Mon m) where
   comult f m n = f (m + n)
 
-instance (Semiring r, Monoidal m) => CounitalCoalgebra r (Mon m) where
+instance (Semiring r, Monoidal m) => CounitalCombinatorialFreeCoalgebra r (Mon m) where
   counit f = f zero
   
-instance (Commutative r, Semiring r, Abelian m) => CocommutativeCoalgebra r (Mon m)
+instance (Commutative r, Semiring r, Abelian m) => CocommutativeCombinatorialFreeCoalgebra r (Mon m)
 
 -- TODO: check
-instance (IdempotentSemiring r, Idempotent m) => IdempotentCoalgebra r (Mon m) 
+instance (IdempotentSemiring r, Idempotent m) => IdempotentCombinatorialFreeCoalgebra r (Mon m) 
 
-instance (Semiring r, Partitionable m) => Algebra r (Mon m) where
+instance (Semiring r, Partitionable m) => CombinatorialFreeAlgebra r (Mon m) where
   mult f = sum1 . partitionWith f
 
-instance (Monoidal r, Semiring r, Partitionable m, DecidableZero m) => UnitalAlgebra r (Mon m) where
+instance (Monoidal r, Semiring r, Partitionable m, DecidableZero m) => UnitalCombinatorialFreeAlgebra r (Mon m) where
   unit x m | isZero m  = x
            | otherwise = zero
 
-instance (Commutative r, Semiring r, Partitionable m, Abelian m) => CommutativeCoalgebra r (Mon m)
+instance (Commutative r, Semiring r, Partitionable m, Abelian m) => CommutativeCombinatorialFreeCoalgebra r (Mon m)
 
-instance (IdempotentSemiring r, Partitionable m, Idempotent m) => IdempotentAlgebra r (Mult m)
+instance (IdempotentSemiring r, Partitionable m, Idempotent m) => IdempotentCombinatorialFreeAlgebra r (Mult m)
 

@@ -4,10 +4,10 @@ module Numeric.Algebra.Unital
   -- * Unital Multiplication (Multiplicative monoid)
     Unital(..)
   , product
-  -- * Unital Associative Algebra 
-  , UnitalAlgebra(..)
-  -- * Unital Coassociative Coalgebra
-  , CounitalCoalgebra(..)
+  -- * Unital Associative CombinatorialFreeAlgebra 
+  , UnitalCombinatorialFreeAlgebra(..)
+  -- * Unital Coassociative CombinatorialFreeCoalgebra
+  , CounitalCombinatorialFreeCoalgebra(..)
   -- * Bialgebra
   , Bialgebra
   ) where
@@ -69,69 +69,69 @@ instance (Unital a, Unital b, Unital c, Unital d, Unital e) => Unital (a,b,c,d,e
   one = (one,one,one,one,one)
 
 -- | An associative unital algebra over a semiring, built using a free module
-class Algebra r a => UnitalAlgebra r a where
+class CombinatorialFreeAlgebra r a => UnitalCombinatorialFreeAlgebra r a where
   unit :: r -> a -> r
 
-instance (Unital r, UnitalAlgebra r a) => Unital (a -> r) where
+instance (Unital r, UnitalCombinatorialFreeAlgebra r a) => Unital (a -> r) where
   one = unit one
 
-instance Semiring r => UnitalAlgebra r () where
+instance Semiring r => UnitalCombinatorialFreeAlgebra r () where
   unit r () = r
 
 -- incoherent
--- instance UnitalAlgebra () a where unit _ _ = ()
--- instance (UnitalAlgebra r a, UnitalAlgebra r b) => UnitalAlgebra (a -> r) b where unit f b a = unit (f a) b
+-- instance UnitalCombinatorialFreeAlgebra () a where unit _ _ = ()
+-- instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b) => UnitalCombinatorialFreeAlgebra (a -> r) b where unit f b a = unit (f a) b
 
-instance (UnitalAlgebra r a, UnitalAlgebra r b) => UnitalAlgebra r (a,b) where
+instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b) => UnitalCombinatorialFreeAlgebra r (a,b) where
   unit r (a,b) = unit r a * unit r b
 
-instance (UnitalAlgebra r a, UnitalAlgebra r b, UnitalAlgebra r c) => UnitalAlgebra r (a,b,c) where
+instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c) => UnitalCombinatorialFreeAlgebra r (a,b,c) where
   unit r (a,b,c) = unit r a * unit r b * unit r c
 
-instance (UnitalAlgebra r a, UnitalAlgebra r b, UnitalAlgebra r c, UnitalAlgebra r d) => UnitalAlgebra r (a,b,c,d) where
+instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c, UnitalCombinatorialFreeAlgebra r d) => UnitalCombinatorialFreeAlgebra r (a,b,c,d) where
   unit r (a,b,c,d) = unit r a * unit r b * unit r c * unit r d
 
-instance (UnitalAlgebra r a, UnitalAlgebra r b, UnitalAlgebra r c, UnitalAlgebra r d, UnitalAlgebra r e) => UnitalAlgebra r (a,b,c,d,e) where
+instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c, UnitalCombinatorialFreeAlgebra r d, UnitalCombinatorialFreeAlgebra r e) => UnitalCombinatorialFreeAlgebra r (a,b,c,d,e) where
   unit r (a,b,c,d,e) = unit r a * unit r b * unit r c * unit r d * unit r e
 
-instance (Monoidal r, Semiring r) => UnitalAlgebra r [a] where
+instance (Monoidal r, Semiring r) => UnitalCombinatorialFreeAlgebra r [a] where
   unit r [] = r
   unit _ _ = zero
 
-instance (Monoidal r, Semiring r) => UnitalAlgebra r (Seq a) where
+instance (Monoidal r, Semiring r) => UnitalCombinatorialFreeAlgebra r (Seq a) where
   unit r a | Seq.null a = r
            | otherwise = zero
 
 -- A coassociative counital coalgebra over a semiring, where the module is free
-class Coalgebra r c => CounitalCoalgebra r c where
+class CombinatorialFreeCoalgebra r c => CounitalCombinatorialFreeCoalgebra r c where
   counit :: (c -> r) -> r
 
-instance (Unital r, UnitalAlgebra r m) => CounitalCoalgebra r (m -> r) where
+instance (Unital r, UnitalCombinatorialFreeAlgebra r m) => CounitalCombinatorialFreeCoalgebra r (m -> r) where
   counit k = k one
 
 -- incoherent
--- instance (UnitalAlgebra r a, CounitalCoalgebra r c) => CounitalCoalgebra (a -> r) c where counit k a = counit (`k` a)
--- instance CounitalCoalgebra () a where counit _ = ()
+-- instance (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r c) => CounitalCombinatorialFreeCoalgebra (a -> r) c where counit k a = counit (`k` a)
+-- instance CounitalCombinatorialFreeCoalgebra () a where counit _ = ()
 
-instance Semiring r => CounitalCoalgebra r () where
+instance Semiring r => CounitalCombinatorialFreeCoalgebra r () where
   counit f = f ()
 
-instance (CounitalCoalgebra r a, CounitalCoalgebra r b) => CounitalCoalgebra r (a, b) where
+instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b) => CounitalCombinatorialFreeCoalgebra r (a, b) where
   counit k = counit $ \a -> counit $ \b -> k (a,b)
 
-instance (CounitalCoalgebra r a, CounitalCoalgebra r b, CounitalCoalgebra r c) => CounitalCoalgebra r (a, b, c) where
+instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c) => CounitalCombinatorialFreeCoalgebra r (a, b, c) where
   counit k = counit $ \a -> counit $ \b -> counit $ \c -> k (a,b,c)
 
-instance (CounitalCoalgebra r a, CounitalCoalgebra r b, CounitalCoalgebra r c, CounitalCoalgebra r d) => CounitalCoalgebra r (a, b, c, d) where
+instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c, CounitalCombinatorialFreeCoalgebra r d) => CounitalCombinatorialFreeCoalgebra r (a, b, c, d) where
   counit k = counit $ \a -> counit $ \b -> counit $ \c -> counit $ \d -> k (a,b,c,d)
 
-instance (CounitalCoalgebra r a, CounitalCoalgebra r b, CounitalCoalgebra r c, CounitalCoalgebra r d, CounitalCoalgebra r e) => CounitalCoalgebra r (a, b, c, d, e) where
+instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c, CounitalCombinatorialFreeCoalgebra r d, CounitalCombinatorialFreeCoalgebra r e) => CounitalCombinatorialFreeCoalgebra r (a, b, c, d, e) where
   counit k = counit $ \a -> counit $ \b -> counit $ \c -> counit $ \d -> counit $ \e -> k (a,b,c,d,e)
 
-instance Semiring r => CounitalCoalgebra r [a] where
+instance Semiring r => CounitalCombinatorialFreeCoalgebra r [a] where
   counit k = k []
 
-instance Semiring r => CounitalCoalgebra r (Seq a) where
+instance Semiring r => CounitalCombinatorialFreeCoalgebra r (Seq a) where
   counit k = k (Seq.empty)
 
 -- | A bialgebra is both a unital algebra and counital coalgebra 
@@ -140,12 +140,12 @@ instance Semiring r => CounitalCoalgebra r (Seq a) where
 -- 'mult' and 'unit' are a coalgebra homomorphisms or (equivalently) that 
 -- 'comult' and 'counit' are an algebra homomorphisms.
 
-class (UnitalAlgebra r a, CounitalCoalgebra r a) => Bialgebra r a
+class (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r a) => Bialgebra r a
 
 -- TODO
 -- instance (Unital r, Bialgebra r m) => Bialgebra r (m -> r)
 -- instance Bialgebra () c
--- instance (UnitalAlgebra r b, Bialgebra r c) => Bialgebra (b -> r) c
+-- instance (UnitalCombinatorialFreeAlgebra r b, Bialgebra r c) => Bialgebra (b -> r) c
 
 instance Semiring r => Bialgebra r ()
 instance (Bialgebra r a, Bialgebra r b) => Bialgebra r (a, b)

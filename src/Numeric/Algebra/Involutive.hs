@@ -4,14 +4,14 @@ module Numeric.Algebra.Involutive
   -- * Involution
     InvolutiveMultiplication(..)
   , InvolutiveSemiring
-  -- * Involutive Algebras
-  , InvolutiveAlgebra(..)
-  , InvolutiveCoalgebra(..)
+  -- * Involutive CombinatorialFreeAlgebras
+  , InvolutiveCombinatorialFreeAlgebra(..)
+  , InvolutiveCombinatorialFreeCoalgebra(..)
   , InvolutiveBialgebra
   -- * Trivial Involution
   , TriviallyInvolutive
-  , TriviallyInvolutiveAlgebra
-  , TriviallyInvolutiveCoalgebra
+  , TriviallyInvolutiveCombinatorialFreeAlgebra
+  , TriviallyInvolutiveCombinatorialFreeCoalgebra
   , TriviallyInvolutiveBialgebra
   ) where
 
@@ -73,7 +73,7 @@ instance
   ) => InvolutiveMultiplication (a,b,c,d,e) where
   adjoint (a,b,c,d,e) = (adjoint a, adjoint b, adjoint c, adjoint d, adjoint e)
 
-instance InvolutiveAlgebra r h => InvolutiveMultiplication (h -> r) where
+instance InvolutiveCombinatorialFreeAlgebra r h => InvolutiveMultiplication (h -> r) where
   adjoint = inv
 
 -- | adjoint (x + y) = adjoint x + adjoint y
@@ -161,40 +161,40 @@ instance ( TriviallyInvolutive a
          ) => TriviallyInvolutive (a,b,c,d,e)
 
 instance ( TriviallyInvolutive r
-         , TriviallyInvolutiveAlgebra r a
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r a
          ) => TriviallyInvolutive (a -> r)
 
 -- inv is an associative algebra homomorphism
-class (InvolutiveSemiring r, Algebra r a) => InvolutiveAlgebra r a where
+class (InvolutiveSemiring r, CombinatorialFreeAlgebra r a) => InvolutiveCombinatorialFreeAlgebra r a where
   inv :: (a -> r) -> a -> r
 
-instance InvolutiveSemiring r => InvolutiveAlgebra r () where
+instance InvolutiveSemiring r => InvolutiveCombinatorialFreeAlgebra r () where
   inv = (adjoint .)
 
 instance 
-  ( InvolutiveAlgebra r a
-  , InvolutiveAlgebra r b
-  ) => InvolutiveAlgebra r (a, b) where
+  ( InvolutiveCombinatorialFreeAlgebra r a
+  , InvolutiveCombinatorialFreeAlgebra r b
+  ) => InvolutiveCombinatorialFreeAlgebra r (a, b) where
   inv f (a,b) = 
     inv (\a' -> 
     inv (\b' -> f (a',b')) b) a
 
 instance 
-  ( InvolutiveAlgebra r a
-  , InvolutiveAlgebra r b
-  , InvolutiveAlgebra r c
-  ) => InvolutiveAlgebra r (a, b, c) where
+  ( InvolutiveCombinatorialFreeAlgebra r a
+  , InvolutiveCombinatorialFreeAlgebra r b
+  , InvolutiveCombinatorialFreeAlgebra r c
+  ) => InvolutiveCombinatorialFreeAlgebra r (a, b, c) where
   inv f (a,b,c) =
     inv (\a' -> 
     inv (\b' ->
     inv (\c' -> f (a',b',c')) c) b) a
 
 instance 
-  ( InvolutiveAlgebra r a
-  , InvolutiveAlgebra r b
-  , InvolutiveAlgebra r c
-  , InvolutiveAlgebra r d
-  ) => InvolutiveAlgebra r (a, b, c, d) where
+  ( InvolutiveCombinatorialFreeAlgebra r a
+  , InvolutiveCombinatorialFreeAlgebra r b
+  , InvolutiveCombinatorialFreeAlgebra r c
+  , InvolutiveCombinatorialFreeAlgebra r d
+  ) => InvolutiveCombinatorialFreeAlgebra r (a, b, c, d) where
   inv f (a,b,c,d) = 
     inv (\a' ->
     inv (\b' ->
@@ -202,12 +202,12 @@ instance
     inv (\d' -> f (a',b',c',d')) d) c) b) a
 
 instance 
-  ( InvolutiveAlgebra r a
-  , InvolutiveAlgebra r b
-  , InvolutiveAlgebra r c
-  , InvolutiveAlgebra r d
-  , InvolutiveAlgebra r e
-  ) => InvolutiveAlgebra r (a, b, c, d, e) where
+  ( InvolutiveCombinatorialFreeAlgebra r a
+  , InvolutiveCombinatorialFreeAlgebra r b
+  , InvolutiveCombinatorialFreeAlgebra r c
+  , InvolutiveCombinatorialFreeAlgebra r d
+  , InvolutiveCombinatorialFreeAlgebra r e
+  ) => InvolutiveCombinatorialFreeAlgebra r (a, b, c, d, e) where
   inv f (a,b,c,d,e) = 
     inv (\a' -> 
     inv (\b' -> 
@@ -217,71 +217,71 @@ instance
 
 
 
-class ( CommutativeAlgebra r a
+class ( CommutativeCombinatorialFreeAlgebra r a
       , TriviallyInvolutive r
-      , InvolutiveAlgebra r a
-      ) => TriviallyInvolutiveAlgebra r a
+      , InvolutiveCombinatorialFreeAlgebra r a
+      ) => TriviallyInvolutiveCombinatorialFreeAlgebra r a
 
 instance ( TriviallyInvolutive r
          , InvolutiveSemiring r
-         ) => TriviallyInvolutiveAlgebra r ()
+         ) => TriviallyInvolutiveCombinatorialFreeAlgebra r ()
 
-instance ( TriviallyInvolutiveAlgebra r a
-         , TriviallyInvolutiveAlgebra r b
-         ) => TriviallyInvolutiveAlgebra r (a, b) where
+instance ( TriviallyInvolutiveCombinatorialFreeAlgebra r a
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r b
+         ) => TriviallyInvolutiveCombinatorialFreeAlgebra r (a, b) where
 
-instance (TriviallyInvolutiveAlgebra r a
-         , TriviallyInvolutiveAlgebra r b
-         , TriviallyInvolutiveAlgebra r c
-         ) => TriviallyInvolutiveAlgebra r (a, b, c) where
+instance (TriviallyInvolutiveCombinatorialFreeAlgebra r a
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r b
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r c
+         ) => TriviallyInvolutiveCombinatorialFreeAlgebra r (a, b, c) where
 
-instance ( TriviallyInvolutiveAlgebra r a
-         , TriviallyInvolutiveAlgebra r b
-         , TriviallyInvolutiveAlgebra r c
-         , TriviallyInvolutiveAlgebra r d
-         ) => TriviallyInvolutiveAlgebra r (a, b, c, d)
+instance ( TriviallyInvolutiveCombinatorialFreeAlgebra r a
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r b
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r c
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r d
+         ) => TriviallyInvolutiveCombinatorialFreeAlgebra r (a, b, c, d)
 
-instance ( TriviallyInvolutiveAlgebra r a
-         , TriviallyInvolutiveAlgebra r b
-         , TriviallyInvolutiveAlgebra r c
-         , TriviallyInvolutiveAlgebra r d
-         , TriviallyInvolutiveAlgebra r e
-         ) => TriviallyInvolutiveAlgebra r (a, b, c, d, e)
+instance ( TriviallyInvolutiveCombinatorialFreeAlgebra r a
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r b
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r c
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r d
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r e
+         ) => TriviallyInvolutiveCombinatorialFreeAlgebra r (a, b, c, d, e)
 
 
 
 class ( InvolutiveSemiring r
-      , Coalgebra r c
-      ) => InvolutiveCoalgebra r c where
+      , CombinatorialFreeCoalgebra r c
+      ) => InvolutiveCombinatorialFreeCoalgebra r c where
   coinv :: (c -> r) -> c -> r
 
-instance InvolutiveSemiring r => InvolutiveCoalgebra r () where
+instance InvolutiveSemiring r => InvolutiveCombinatorialFreeCoalgebra r () where
   coinv f c = adjoint (f c)
 
 instance 
-  ( InvolutiveCoalgebra r a
-  , InvolutiveCoalgebra r b
-  ) => InvolutiveCoalgebra r (a, b) where
+  ( InvolutiveCombinatorialFreeCoalgebra r a
+  , InvolutiveCombinatorialFreeCoalgebra r b
+  ) => InvolutiveCombinatorialFreeCoalgebra r (a, b) where
   coinv f (a,b) = 
     coinv (\a' -> 
     coinv (\b' -> f (a',b')) b) a
 
 instance 
-  ( InvolutiveCoalgebra r a
-  , InvolutiveCoalgebra r b
-  , InvolutiveCoalgebra r c
-  ) => InvolutiveCoalgebra r (a, b, c) where
+  ( InvolutiveCombinatorialFreeCoalgebra r a
+  , InvolutiveCombinatorialFreeCoalgebra r b
+  , InvolutiveCombinatorialFreeCoalgebra r c
+  ) => InvolutiveCombinatorialFreeCoalgebra r (a, b, c) where
   coinv f (a,b,c) = 
     coinv (\a' -> 
     coinv (\b' -> 
     coinv (\c' -> f (a',b',c')) c) b) a
 
 instance 
-  ( InvolutiveCoalgebra r a
-  , InvolutiveCoalgebra r b
-  , InvolutiveCoalgebra r c
-  , InvolutiveCoalgebra r d
-  ) => InvolutiveCoalgebra r (a, b, c, d) where
+  ( InvolutiveCombinatorialFreeCoalgebra r a
+  , InvolutiveCombinatorialFreeCoalgebra r b
+  , InvolutiveCombinatorialFreeCoalgebra r c
+  , InvolutiveCombinatorialFreeCoalgebra r d
+  ) => InvolutiveCombinatorialFreeCoalgebra r (a, b, c, d) where
   coinv f (a,b,c,d) = 
     coinv (\a' -> 
     coinv (\b' -> 
@@ -289,12 +289,12 @@ instance
     coinv (\d' -> f (a',b',c',d')) d) c) b) a
 
 instance 
-  ( InvolutiveCoalgebra r a
-  , InvolutiveCoalgebra r b
-  , InvolutiveCoalgebra r c
-  , InvolutiveCoalgebra r d
-  , InvolutiveCoalgebra r e
-  ) => InvolutiveCoalgebra r (a, b, c, d, e) where
+  ( InvolutiveCombinatorialFreeCoalgebra r a
+  , InvolutiveCombinatorialFreeCoalgebra r b
+  , InvolutiveCombinatorialFreeCoalgebra r c
+  , InvolutiveCombinatorialFreeCoalgebra r d
+  , InvolutiveCombinatorialFreeCoalgebra r e
+  ) => InvolutiveCombinatorialFreeCoalgebra r (a, b, c, d, e) where
   coinv f (a,b,c,d,e) = 
     coinv (\a' -> 
     coinv (\b' -> 
@@ -304,57 +304,57 @@ instance
 
 
 
-class ( CocommutativeCoalgebra r a
+class ( CocommutativeCombinatorialFreeCoalgebra r a
       , TriviallyInvolutive r
-      , InvolutiveCoalgebra r a
-      ) => TriviallyInvolutiveCoalgebra r a
+      , InvolutiveCombinatorialFreeCoalgebra r a
+      ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r a
 
 instance ( TriviallyInvolutive r
          , InvolutiveSemiring r
-         ) => TriviallyInvolutiveCoalgebra r ()
+         ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r ()
 
-instance ( TriviallyInvolutiveCoalgebra r a
-         , TriviallyInvolutiveCoalgebra r b
-         ) => TriviallyInvolutiveCoalgebra r (a, b)
+instance ( TriviallyInvolutiveCombinatorialFreeCoalgebra r a
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r b
+         ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r (a, b)
 
-instance ( TriviallyInvolutiveCoalgebra r a
-         , TriviallyInvolutiveCoalgebra r b
-         , TriviallyInvolutiveCoalgebra r c
-         ) => TriviallyInvolutiveCoalgebra r (a, b, c)
+instance ( TriviallyInvolutiveCombinatorialFreeCoalgebra r a
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r b
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r c
+         ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r (a, b, c)
 
-instance ( TriviallyInvolutiveCoalgebra r a
-         , TriviallyInvolutiveCoalgebra r b
-         , TriviallyInvolutiveCoalgebra r c
-         , TriviallyInvolutiveCoalgebra r d
-         ) => TriviallyInvolutiveCoalgebra r (a, b, c, d)
+instance ( TriviallyInvolutiveCombinatorialFreeCoalgebra r a
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r b
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r c
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r d
+         ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r (a, b, c, d)
 
-instance ( TriviallyInvolutiveCoalgebra r a
-         , TriviallyInvolutiveCoalgebra r b
-         , TriviallyInvolutiveCoalgebra r c
-         , TriviallyInvolutiveCoalgebra r d
-         , TriviallyInvolutiveCoalgebra r e
-         ) => TriviallyInvolutiveCoalgebra r (a, b, c, d, e)
+instance ( TriviallyInvolutiveCombinatorialFreeCoalgebra r a
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r b
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r c
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r d
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r e
+         ) => TriviallyInvolutiveCombinatorialFreeCoalgebra r (a, b, c, d, e)
 
 
 
 class ( Bialgebra r h
-      , InvolutiveAlgebra r h
-      , InvolutiveCoalgebra r h
+      , InvolutiveCombinatorialFreeAlgebra r h
+      , InvolutiveCombinatorialFreeCoalgebra r h
       ) => InvolutiveBialgebra r h
 
 instance ( Bialgebra r h
-         , InvolutiveAlgebra r h
-         , InvolutiveCoalgebra r h
+         , InvolutiveCombinatorialFreeAlgebra r h
+         , InvolutiveCombinatorialFreeCoalgebra r h
          ) => InvolutiveBialgebra r h
 
 
 
 class ( InvolutiveBialgebra r h
-      , TriviallyInvolutiveAlgebra r h
-      , TriviallyInvolutiveCoalgebra r h
+      , TriviallyInvolutiveCombinatorialFreeAlgebra r h
+      , TriviallyInvolutiveCombinatorialFreeCoalgebra r h
       ) => TriviallyInvolutiveBialgebra r h
 
 instance ( InvolutiveBialgebra r h
-         , TriviallyInvolutiveAlgebra r h
-         , TriviallyInvolutiveCoalgebra r h
+         , TriviallyInvolutiveCombinatorialFreeAlgebra r h
+         , TriviallyInvolutiveCombinatorialFreeCoalgebra r h
          ) => TriviallyInvolutiveBialgebra r h

@@ -119,20 +119,20 @@ instance Additive r => Additive (Map r b a) where
   Map m + Map n = Map $ m + n
   sinnum1p n (Map m) = Map $ sinnum1p n m
 
-instance Coalgebra r m => Multiplicative (Map r b m) where
+instance CombinatorialFreeCoalgebra r m => Multiplicative (Map r b m) where
   f * g = Map $ \k b -> (f $# \a -> (g $# comult k a) b) b
-instance CounitalCoalgebra r m => Unital (Map r b m) where
+instance CounitalCombinatorialFreeCoalgebra r m => Unital (Map r b m) where
   one = Map $ \k _ -> counit k
 
-instance Coalgebra r m => Semiring (Map r b m)
+instance CombinatorialFreeCoalgebra r m => Semiring (Map r b m)
 
-instance Coalgebra r m => LeftModule (Map r b m) (Map r b m) where
+instance CombinatorialFreeCoalgebra r m => LeftModule (Map r b m) (Map r b m) where
   (.*) = (*)
 
 instance LeftModule r s => LeftModule r (Map s b m) where
   s .* Map m = Map $ \k b -> s .* m k b
 
-instance Coalgebra r m => RightModule (Map r b m) (Map r b m) where (*.) = (*)
+instance CombinatorialFreeCoalgebra r m => RightModule (Map r b m) (Map r b m) where (*.) = (*)
 instance RightModule r s => RightModule r (Map s b m) where
   Map m *. s = Map $ \k b -> m k b *. s
 
@@ -162,45 +162,45 @@ instance Group s => Group (Map s b a) where
   subtract (Map m) (Map n) = Map $ subtract m n
   times n (Map m) = Map $ times n m
 
-instance (Commutative m, Coalgebra r m) => Commutative (Map r b m)
+instance (Commutative m, CombinatorialFreeCoalgebra r m) => Commutative (Map r b m)
 
-instance (Rig r, CounitalCoalgebra r m) => Rig (Map r b m)
+instance (Rig r, CounitalCombinatorialFreeCoalgebra r m) => Rig (Map r b m)
 
-instance (Ring r, CounitalCoalgebra r m) => Ring (Map r a m)
+instance (Ring r, CounitalCombinatorialFreeCoalgebra r m) => Ring (Map r a m)
 
 -- | (inefficiently) combine a linear combination of basis vectors to make a map.
 -- arrMap :: (Monoidal r, Semiring r) => (b -> [(r, a)]) -> Map r b a
 -- arrMap f = Map $ \k b -> sum [ r * k a | (r, a) <- f b ]
 
-comultMap :: Algebra r a => Map r a (a,a)
+comultMap :: CombinatorialFreeAlgebra r a => Map r a (a,a)
 comultMap = Map $ mult . curry
 
-multMap :: Coalgebra r c => Map r (c,c) c
+multMap :: CombinatorialFreeCoalgebra r c => Map r (c,c) c
 multMap = Map $ uncurry . comult
 
-counitMap :: UnitalAlgebra r a => Map r a ()
+counitMap :: UnitalCombinatorialFreeAlgebra r a => Map r a ()
 counitMap = Map $ \k -> unit $ k ()
 
-unitMap :: CounitalCoalgebra r c => Map r () c
+unitMap :: CounitalCombinatorialFreeCoalgebra r c => Map r () c
 unitMap = Map $ \k () -> counit k
 
 -- | convolution given an associative algebra and coassociative coalgebra
-convolveMap :: (Algebra r a, Coalgebra r c) => Map r a c -> Map r a c -> Map r a c
+convolveMap :: (CombinatorialFreeAlgebra r a, CombinatorialFreeCoalgebra r c) => Map r a c -> Map r a c -> Map r a c
 convolveMap f g = multMap . (f *** g) . comultMap
 
 -- convolveMap antipodeMap id = convolveMap id antipodeMap = unit . counit
-antipodeMap :: HopfAlgebra r h => Map r h h
+antipodeMap :: HopfCombinatorialFreeAlgebra r h => Map r h h
 antipodeMap = Map antipode
 
-coinvMap :: InvolutiveAlgebra r a => Map r a a
+coinvMap :: InvolutiveCombinatorialFreeAlgebra r a => Map r a a
 coinvMap = Map inv
 
-invMap :: InvolutiveCoalgebra r c => Map r c c
+invMap :: InvolutiveCombinatorialFreeCoalgebra r c => Map r c c
 invMap = Map coinv
 
 {-
 -- ring homomorphism from r -> r^a
-embedMap :: (Unital m, CounitalCoalgebra r m) => (b -> r) -> Map r b m
+embedMap :: (Unital m, CounitalCombinatorialFreeCoalgebra r m) => (b -> r) -> Map r b m
 embedMap f = Map $ \k b -> f b * k one
 
 -- if the characteristic of s does not divide the order of a, then s[a] is semisimple

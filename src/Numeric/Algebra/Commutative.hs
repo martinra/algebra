@@ -1,8 +1,8 @@
 {-# LANGUAGE MultiParamTypeClasses, UndecidableInstances, FlexibleInstances, TypeOperators #-}
 module Numeric.Algebra.Commutative 
   ( Commutative
-  , CommutativeAlgebra
-  , CocommutativeCoalgebra
+  , CommutativeCombinatorialFreeAlgebra
+  , CocommutativeCombinatorialFreeCoalgebra
   , CommutativeBialgebra
   ) where
 
@@ -60,44 +60,44 @@ instance ( Commutative a
          , Commutative e
          ) => Commutative (a,b,c,d,e)
 
-instance CommutativeAlgebra r a => Commutative (a -> r)
+instance CommutativeCombinatorialFreeAlgebra r a => Commutative (a -> r)
 
-class Algebra r a => CommutativeAlgebra r a
+class CombinatorialFreeAlgebra r a => CommutativeCombinatorialFreeAlgebra r a
 
 instance ( Commutative r
          , Semiring r
-         ) => CommutativeAlgebra r ()
+         ) => CommutativeCombinatorialFreeAlgebra r ()
 
-instance ( CommutativeAlgebra r a
-         , CommutativeAlgebra r b
-         ) => CommutativeAlgebra r (a,b)
+instance ( CommutativeCombinatorialFreeAlgebra r a
+         , CommutativeCombinatorialFreeAlgebra r b
+         ) => CommutativeCombinatorialFreeAlgebra r (a,b)
 
-instance ( CommutativeAlgebra r a
-         , CommutativeAlgebra r b
-         , CommutativeAlgebra r c
-         ) => CommutativeAlgebra r (a,b,c)
+instance ( CommutativeCombinatorialFreeAlgebra r a
+         , CommutativeCombinatorialFreeAlgebra r b
+         , CommutativeCombinatorialFreeAlgebra r c
+         ) => CommutativeCombinatorialFreeAlgebra r (a,b,c)
 
-instance ( CommutativeAlgebra r a
-         , CommutativeAlgebra r b
-         , CommutativeAlgebra r c
-         , CommutativeAlgebra r d
-         ) => CommutativeAlgebra r (a,b,c,d)
+instance ( CommutativeCombinatorialFreeAlgebra r a
+         , CommutativeCombinatorialFreeAlgebra r b
+         , CommutativeCombinatorialFreeAlgebra r c
+         , CommutativeCombinatorialFreeAlgebra r d
+         ) => CommutativeCombinatorialFreeAlgebra r (a,b,c,d)
 
-instance ( CommutativeAlgebra r a
-         , CommutativeAlgebra r b
-         , CommutativeAlgebra r c
-         , CommutativeAlgebra r d
-         , CommutativeAlgebra r e
-         ) => CommutativeAlgebra r (a,b,c,d,e)
+instance ( CommutativeCombinatorialFreeAlgebra r a
+         , CommutativeCombinatorialFreeAlgebra r b
+         , CommutativeCombinatorialFreeAlgebra r c
+         , CommutativeCombinatorialFreeAlgebra r d
+         , CommutativeCombinatorialFreeAlgebra r e
+         ) => CommutativeCombinatorialFreeAlgebra r (a,b,c,d,e)
 
 instance ( Commutative r
          , Semiring r
          , Ord a
-         ) => CommutativeAlgebra r (Set a)
+         ) => CommutativeCombinatorialFreeAlgebra r (Set a)
 
 instance (Commutative r
          , Semiring r
-         ) => CommutativeAlgebra r IntSet
+         ) => CommutativeCombinatorialFreeAlgebra r IntSet
 
 instance (Commutative r
          , Monoidal r
@@ -105,72 +105,72 @@ instance (Commutative r
          , Ord a
          , Abelian b
          , Partitionable b
-         ) => CommutativeAlgebra r (Map a b)
+         ) => CommutativeCombinatorialFreeAlgebra r (Map a b)
 
 instance ( Commutative r
          , Monoidal r
          , Semiring r
          , Abelian b
          , Partitionable b
-         ) => CommutativeAlgebra r (IntMap b)
+         ) => CommutativeCombinatorialFreeAlgebra r (IntMap b)
 
 
 
-class Coalgebra r c => CocommutativeCoalgebra r c
+class CombinatorialFreeCoalgebra r c => CocommutativeCombinatorialFreeCoalgebra r c
 
-instance CommutativeAlgebra r m => CocommutativeCoalgebra r (m -> r)
+instance CommutativeCombinatorialFreeAlgebra r m => CocommutativeCombinatorialFreeCoalgebra r (m -> r)
 
-instance (Commutative r, Semiring r) => CocommutativeCoalgebra r ()
+instance (Commutative r, Semiring r) => CocommutativeCombinatorialFreeCoalgebra r ()
 
-instance ( CocommutativeCoalgebra r a
-         , CocommutativeCoalgebra r b
-         ) => CocommutativeCoalgebra r (a,b)
+instance ( CocommutativeCombinatorialFreeCoalgebra r a
+         , CocommutativeCombinatorialFreeCoalgebra r b
+         ) => CocommutativeCombinatorialFreeCoalgebra r (a,b)
 
-instance ( CocommutativeCoalgebra r a
-         , CocommutativeCoalgebra r b
-         , CocommutativeCoalgebra r c
-         ) => CocommutativeCoalgebra r (a,b,c)
+instance ( CocommutativeCombinatorialFreeCoalgebra r a
+         , CocommutativeCombinatorialFreeCoalgebra r b
+         , CocommutativeCombinatorialFreeCoalgebra r c
+         ) => CocommutativeCombinatorialFreeCoalgebra r (a,b,c)
 
-instance ( CocommutativeCoalgebra r a
-         , CocommutativeCoalgebra r b
-         , CocommutativeCoalgebra r c
-         , CocommutativeCoalgebra r d
-         ) => CocommutativeCoalgebra r (a,b,c,d)
+instance ( CocommutativeCombinatorialFreeCoalgebra r a
+         , CocommutativeCombinatorialFreeCoalgebra r b
+         , CocommutativeCombinatorialFreeCoalgebra r c
+         , CocommutativeCombinatorialFreeCoalgebra r d
+         ) => CocommutativeCombinatorialFreeCoalgebra r (a,b,c,d)
 
-instance ( CocommutativeCoalgebra r a
-         , CocommutativeCoalgebra r b
-         , CocommutativeCoalgebra r c
-         , CocommutativeCoalgebra r d
-         , CocommutativeCoalgebra r e
-         ) => CocommutativeCoalgebra r (a,b,c,d,e)
-
-instance ( Commutative r
-         , Semiring r
-         , Ord a) => CocommutativeCoalgebra r (Set a)
+instance ( CocommutativeCombinatorialFreeCoalgebra r a
+         , CocommutativeCombinatorialFreeCoalgebra r b
+         , CocommutativeCombinatorialFreeCoalgebra r c
+         , CocommutativeCombinatorialFreeCoalgebra r d
+         , CocommutativeCombinatorialFreeCoalgebra r e
+         ) => CocommutativeCombinatorialFreeCoalgebra r (a,b,c,d,e)
 
 instance ( Commutative r
          , Semiring r
-         ) => CocommutativeCoalgebra r IntSet
+         , Ord a) => CocommutativeCombinatorialFreeCoalgebra r (Set a)
+
+instance ( Commutative r
+         , Semiring r
+         ) => CocommutativeCombinatorialFreeCoalgebra r IntSet
 
 instance ( Commutative r
          , Semiring r
          , Ord a
          , Abelian b
-         ) => CocommutativeCoalgebra r (Map a b)
+         ) => CocommutativeCombinatorialFreeCoalgebra r (Map a b)
 
 instance ( Commutative r
          , Semiring r
          , Abelian b
-         ) => CocommutativeCoalgebra r (IntMap b)
+         ) => CocommutativeCombinatorialFreeCoalgebra r (IntMap b)
 
 
 
 class ( Bialgebra r h
-      , CommutativeAlgebra r h
-      , CocommutativeCoalgebra r h
+      , CommutativeCombinatorialFreeAlgebra r h
+      , CocommutativeCombinatorialFreeCoalgebra r h
       ) => CommutativeBialgebra r h
 
 instance ( Bialgebra r h
-         , CommutativeAlgebra r h
-         , CocommutativeCoalgebra r h
+         , CommutativeCombinatorialFreeAlgebra r h
+         , CocommutativeCombinatorialFreeCoalgebra r h
          ) => CommutativeBialgebra r h

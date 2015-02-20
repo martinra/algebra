@@ -125,7 +125,7 @@ filterGrade :: Monoidal r => BasisCoblade m -> Int -> Comultivector r m
 filterGrade b k | grade b == k = zero
                 | otherwise    = return b
 
-instance Eigenmetric r m => Coalgebra r (BasisCoblade m) where
+instance Eigenmetric r m => CombinatorialFreeCoalgebra r (BasisCoblade m) where
   comult f n m = scale (n .&. m) $ reorder n m $ f $ xor n m where
     scale b
       | euclidean n = id
@@ -136,7 +136,7 @@ instance Eigenmetric r m => Coalgebra r (BasisCoblade m) where
               , m' <- metric (e b :: m)
               = go (acc*m') (clearBit n' b)
 
-instance Eigenmetric r m => CounitalCoalgebra r (BasisCoblade m) where
+instance Eigenmetric r m => CounitalCombinatorialFreeCoalgebra r (BasisCoblade m) where
   counit f = f (BasisCoblade zero)
 
 -- instance Group r => InvertibleModule r BasisCoblade where

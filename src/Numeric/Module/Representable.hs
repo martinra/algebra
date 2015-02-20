@@ -7,13 +7,13 @@ module Numeric.Module.Representable
   , zeroRep, sinnumRep
   -- * Representable Group
   , negateRep, minusRep, subtractRep, timesRep
-  -- * Representable Multiplicative (via Algebra)
+  -- * Representable Multiplicative (via CombinatorialFreeAlgebra)
   , mulRep
-  -- * Representable Unital (via UnitalAlgebra)
+  -- * Representable Unital (via UnitalCombinatorialFreeAlgebra)
   , oneRep
-  -- * Representable Rig (via Algebra)
+  -- * Representable Rig (via CombinatorialFreeAlgebra)
   , fromNaturalRep
-  -- * Representable Ring (via Algebra)
+  -- * Representable Ring (via CombinatorialFreeAlgebra)
   , fromIntegerRep
   ) where
 
@@ -63,17 +63,17 @@ timesRep :: (Integral n, Functor m, Group r) => n -> m r -> m r
 timesRep = fmap . times
 
 -- | `Multiplicative.(*)` default definition
-mulRep :: (Representable m, Algebra r (Rep m)) => m r -> m r -> m r
+mulRep :: (Representable m, CombinatorialFreeAlgebra r (Rep m)) => m r -> m r -> m r
 mulRep m n = tabulate $ mult (\b1 b2 -> index m b1 * index n b2)
 
 -- | `Unital.one` default definition
-oneRep :: (Representable m, Unital r, UnitalAlgebra r (Rep m)) => m r
+oneRep :: (Representable m, Unital r, UnitalCombinatorialFreeAlgebra r (Rep m)) => m r
 oneRep = tabulate $ unit one
 
 -- | `Rig.fromNatural` default definition
-fromNaturalRep :: (UnitalAlgebra r (Rep m), Representable m, Rig r) => Natural -> m r
+fromNaturalRep :: (UnitalCombinatorialFreeAlgebra r (Rep m), Representable m, Rig r) => Natural -> m r
 fromNaturalRep n = tabulate $ unit (fromNatural n)
 
 -- | `Ring.fromInteger` default definition
-fromIntegerRep :: (UnitalAlgebra r (Rep m), Representable m, Ring r) => Integer -> m r
+fromIntegerRep :: (UnitalCombinatorialFreeAlgebra r (Rep m), Representable m, Ring r) => Integer -> m r
 fromIntegerRep n = tabulate $ unit (fromInteger n)

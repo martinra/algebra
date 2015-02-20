@@ -72,51 +72,51 @@ instance Additive r => Additive (Covector r a) where
   Covector m + Covector n = Covector $ m + n
   sinnum1p n (Covector m) = Covector $ sinnum1p n m
 
-instance Coalgebra r m => Multiplicative (Covector r m) where
+instance CombinatorialFreeCoalgebra r m => Multiplicative (Covector r m) where
   Covector f * Covector g = Covector $ \k -> f (\m -> g (comult k m))
 
-instance (Commutative m, Coalgebra r m) => Commutative (Covector r m)
+instance (Commutative m, CombinatorialFreeCoalgebra r m) => Commutative (Covector r m)
 
-instance Coalgebra r m => Semiring (Covector r m)
+instance CombinatorialFreeCoalgebra r m => Semiring (Covector r m)
 
-instance CounitalCoalgebra r m => Unital (Covector r m) where
+instance CounitalCombinatorialFreeCoalgebra r m => Unital (Covector r m) where
   one = Covector counit
 
-instance (Rig r, CounitalCoalgebra r m) => Rig (Covector r m)
+instance (Rig r, CounitalCombinatorialFreeCoalgebra r m) => Rig (Covector r m)
 
-instance (Ring r, CounitalCoalgebra r m) => Ring (Covector r m)
+instance (Ring r, CounitalCombinatorialFreeCoalgebra r m) => Ring (Covector r m)
 
 instance Idempotent r => Idempotent (Covector r a)
 
-instance (Idempotent r, IdempotentCoalgebra r a) => Band (Covector r a)
+instance (Idempotent r, IdempotentCombinatorialFreeCoalgebra r a) => Band (Covector r a)
 
-multM :: Coalgebra r c => c -> c -> Covector r c
+multM :: CombinatorialFreeCoalgebra r c => c -> c -> Covector r c
 multM a b = Covector $ \k -> comult k a b
 
-unitM :: CounitalCoalgebra r c => Covector r c
+unitM :: CounitalCombinatorialFreeCoalgebra r c => Covector r c
 unitM = Covector counit
 
-comultM :: Algebra r a => a -> Covector r (a,a)
+comultM :: CombinatorialFreeAlgebra r a => a -> Covector r (a,a)
 comultM c = Covector $ \k -> mult (curry k) c 
 
-counitM :: UnitalAlgebra r a => a -> Covector r ()
+counitM :: UnitalCombinatorialFreeAlgebra r a => a -> Covector r ()
 counitM a = Covector $ \k -> unit (k ()) a
 
-convolveM :: (Algebra r c, Coalgebra r a) => (c -> Covector r a) -> (c -> Covector r a) -> c -> Covector r a
+convolveM :: (CombinatorialFreeAlgebra r c, CombinatorialFreeCoalgebra r a) => (c -> Covector r a) -> (c -> Covector r a) -> c -> Covector r a
 convolveM f g c = do
    (c1,c2) <- comultM c
    a1 <- f c1
    a2 <- g c2
    multM a1 a2
 
-invM :: InvolutiveAlgebra r h => h -> Covector r h
+invM :: InvolutiveCombinatorialFreeAlgebra r h => h -> Covector r h
 invM = Covector . flip inv
 
-coinvM :: InvolutiveCoalgebra r h => h -> Covector r h
+coinvM :: InvolutiveCombinatorialFreeCoalgebra r h => h -> Covector r h
 coinvM = Covector . flip coinv
 
 -- | convolveM antipodeM return = convolveM return antipodeM = comultM >=> uncurry joinM
-antipodeM :: HopfAlgebra r h => h -> Covector r h
+antipodeM :: HopfCombinatorialFreeAlgebra r h => h -> Covector r h
 antipodeM = Covector . flip antipode
 
 -- TODO: we can also build up the augmentation ideal
@@ -133,13 +133,13 @@ instance Group s => Group (Covector s a) where
   subtract (Covector m) (Covector n) = Covector $ subtract m n
   times n (Covector m) = Covector $ times n m
 
-instance Coalgebra r m => LeftModule (Covector r m) (Covector r m) where
+instance CombinatorialFreeCoalgebra r m => LeftModule (Covector r m) (Covector r m) where
   (.*) = (*)
 
 instance LeftModule r s => LeftModule r (Covector s m) where
   s .* m = Covector $ \k -> s .* (m $* k)
 
-instance Coalgebra r m => RightModule (Covector r m) (Covector r m) where
+instance CombinatorialFreeCoalgebra r m => RightModule (Covector r m) (Covector r m) where
   (*.) = (*)
 
 instance RightModule r s => RightModule r (Covector s m) where

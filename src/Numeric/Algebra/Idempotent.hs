@@ -4,8 +4,8 @@ module Numeric.Algebra.Idempotent
   , pow1pBand
   , powBand
   -- * Idempotent algebras
-  , IdempotentAlgebra
-  , IdempotentCoalgebra
+  , IdempotentCombinatorialFreeAlgebra
+  , IdempotentCombinatorialFreeCoalgebra
   , IdempotentBialgebra
   ) where
 
@@ -35,25 +35,25 @@ instance (Band a, Band b, Band c, Band d) => Band (a,b,c,d)
 instance (Band a, Band b, Band c, Band d, Band e) => Band (a,b,c,d,e)
 
 -- idempotent algebra
-class Algebra r a => IdempotentAlgebra r a
-instance (Semiring r, Band r, Ord a) => IdempotentAlgebra r (Set a)
-instance (Semiring r, Band r) => IdempotentAlgebra r IntSet
-instance (Semiring r, Band r) => IdempotentAlgebra r ()
-instance (IdempotentAlgebra r a, IdempotentAlgebra r b) => IdempotentAlgebra r (a,b)
-instance (IdempotentAlgebra r a, IdempotentAlgebra r b, IdempotentAlgebra r c) => IdempotentAlgebra r (a,b,c)
-instance (IdempotentAlgebra r a, IdempotentAlgebra r b, IdempotentAlgebra r c, IdempotentAlgebra r d) => IdempotentAlgebra r (a,b,c,d)
-instance (IdempotentAlgebra r a, IdempotentAlgebra r b, IdempotentAlgebra r c, IdempotentAlgebra r d, IdempotentAlgebra r e) => IdempotentAlgebra r (a,b,c,d,e)
+class CombinatorialFreeAlgebra r a => IdempotentCombinatorialFreeAlgebra r a
+instance (Semiring r, Band r, Ord a) => IdempotentCombinatorialFreeAlgebra r (Set a)
+instance (Semiring r, Band r) => IdempotentCombinatorialFreeAlgebra r IntSet
+instance (Semiring r, Band r) => IdempotentCombinatorialFreeAlgebra r ()
+instance (IdempotentCombinatorialFreeAlgebra r a, IdempotentCombinatorialFreeAlgebra r b) => IdempotentCombinatorialFreeAlgebra r (a,b)
+instance (IdempotentCombinatorialFreeAlgebra r a, IdempotentCombinatorialFreeAlgebra r b, IdempotentCombinatorialFreeAlgebra r c) => IdempotentCombinatorialFreeAlgebra r (a,b,c)
+instance (IdempotentCombinatorialFreeAlgebra r a, IdempotentCombinatorialFreeAlgebra r b, IdempotentCombinatorialFreeAlgebra r c, IdempotentCombinatorialFreeAlgebra r d) => IdempotentCombinatorialFreeAlgebra r (a,b,c,d)
+instance (IdempotentCombinatorialFreeAlgebra r a, IdempotentCombinatorialFreeAlgebra r b, IdempotentCombinatorialFreeAlgebra r c, IdempotentCombinatorialFreeAlgebra r d, IdempotentCombinatorialFreeAlgebra r e) => IdempotentCombinatorialFreeAlgebra r (a,b,c,d,e)
 
 -- idempotent coalgebra
-class Coalgebra r c => IdempotentCoalgebra r c
-instance (Semiring r, Band r, Ord c) => IdempotentCoalgebra r (Set c)
-instance (Semiring r, Band r) => IdempotentCoalgebra r IntSet
-instance (Semiring r, Band r) => IdempotentCoalgebra r ()
-instance (IdempotentCoalgebra r a, IdempotentCoalgebra r b) => IdempotentCoalgebra r (a,b)
-instance (IdempotentCoalgebra r a, IdempotentCoalgebra r b, IdempotentCoalgebra r c) => IdempotentCoalgebra r (a,b,c)
-instance (IdempotentCoalgebra r a, IdempotentCoalgebra r b, IdempotentCoalgebra r c, IdempotentCoalgebra r d) => IdempotentCoalgebra r (a,b,c,d)
-instance (IdempotentCoalgebra r a, IdempotentCoalgebra r b, IdempotentCoalgebra r c, IdempotentCoalgebra r d, IdempotentCoalgebra r e) => IdempotentCoalgebra r (a,b,c,d,e)
+class CombinatorialFreeCoalgebra r c => IdempotentCombinatorialFreeCoalgebra r c
+instance (Semiring r, Band r, Ord c) => IdempotentCombinatorialFreeCoalgebra r (Set c)
+instance (Semiring r, Band r) => IdempotentCombinatorialFreeCoalgebra r IntSet
+instance (Semiring r, Band r) => IdempotentCombinatorialFreeCoalgebra r ()
+instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeCoalgebra r b) => IdempotentCombinatorialFreeCoalgebra r (a,b)
+instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeCoalgebra r b, IdempotentCombinatorialFreeCoalgebra r c) => IdempotentCombinatorialFreeCoalgebra r (a,b,c)
+instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeCoalgebra r b, IdempotentCombinatorialFreeCoalgebra r c, IdempotentCombinatorialFreeCoalgebra r d) => IdempotentCombinatorialFreeCoalgebra r (a,b,c,d)
+instance (IdempotentCombinatorialFreeCoalgebra r a, IdempotentCombinatorialFreeCoalgebra r b, IdempotentCombinatorialFreeCoalgebra r c, IdempotentCombinatorialFreeCoalgebra r d, IdempotentCombinatorialFreeCoalgebra r e) => IdempotentCombinatorialFreeCoalgebra r (a,b,c,d,e)
 
 -- idempotent bialgebra
-class (Bialgebra r h, IdempotentAlgebra r h, IdempotentCoalgebra r h) => IdempotentBialgebra r h 
-instance (Bialgebra r h, IdempotentAlgebra r h, IdempotentCoalgebra r h) => IdempotentBialgebra r h 
+class (Bialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentBialgebra r h 
+instance (Bialgebra r h, IdempotentCombinatorialFreeAlgebra r h, IdempotentCombinatorialFreeCoalgebra r h) => IdempotentBialgebra r h 

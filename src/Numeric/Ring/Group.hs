@@ -24,30 +24,30 @@ instance HasTrie m => HasTrie (GroupBasis m) where
   embedKey = embedKey . runMon
   projectKey = Mon . projectKey
 
-instance (Monoidal r, Semiring r, Eq m, Additive m) => Coalgebra r (GroupBasis m) where
+instance (Monoidal r, Semiring r, Eq m, Additive m) => CombinatorialFreeCoalgebra r (GroupBasis m) where
   comult f m n | m == n    = f m
                | otherwise = zero
 
-instance (Monoidal r, Semiring r, Eq m, Monoidal m) => CounitalCoalgebra r (GroupBasis m) where
+instance (Monoidal r, Semiring r, Eq m, Monoidal m) => CounitalCombinatorialFreeCoalgebra r (GroupBasis m) where
   counit f = f zero
   
-instance (Commutative r, Semiring r, Eq m, Abelian m) => CocommutativeCoalgebra r (GroupBasis m)
+instance (Commutative r, Semiring r, Eq m, Abelian m) => CocommutativeCombinatorialFreeCoalgebra r (GroupBasis m)
   
 -- TODO: check
-instance (Commutative r, IdempotentSemiring r, Eq m, Idempotent m) => IdempotentCoalgebra r (GroupBasis m) 
+instance (Commutative r, IdempotentSemiring r, Eq m, Idempotent m) => IdempotentCombinatorialFreeCoalgebra r (GroupBasis m) 
 
-instance (Semiring r, Partitionable m) => Algebra r (Mon m) where
+instance (Semiring r, Partitionable m) => CombinatorialFreeAlgebra r (Mon m) where
   mult f = sum1 . partitionWith f
 
-instance (Monoidal r, Semiring r, Partitionable m, DecidableZero m) => UnitalAlgebra r (GroupBasis m) where
+instance (Monoidal r, Semiring r, Partitionable m, DecidableZero m) => UnitalCombinatorialFreeAlgebra r (GroupBasis m) where
   unit x m | isZero m  = x
            | otherwise = zero
 
-instance (Commutative r, Semiring r, Partitionable m, Abelian m) => CommutativeCoalgebra r (GroupBasis m)
+instance (Commutative r, Semiring r, Partitionable m, Abelian m) => CommutativeCombinatorialFreeCoalgebra r (GroupBasis m)
 
-instance (IdempotentSemiring r, Partitionable m, Idempotent m) => IdempotentAlgebra r (GroupBasis m)
+instance (IdempotentSemiring r, Partitionable m, Idempotent m) => IdempotentCombinatorialFreeAlgebra r (GroupBasis m)
 
 instance (Monoidal r, Semiring r, Eq m, Partitionable m, DecidableZero m) => Bialgebra r (GroupBasis m) where
 
-instance (Group r, Semiring r, Eq m, Partitionable m, DecidableZero m) => HopfAlgebra r (GroupBasis m) where
+instance (Group r, Semiring r, Eq m, Partitionable m, DecidableZero m) => HopfCombinatorialFreeAlgebra r (GroupBasis m) where
   antipode f m = f (negate m)

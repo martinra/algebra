@@ -137,7 +137,7 @@ instance Partitionable r => Partitionable (Trig r) where
     partitionWith (\b1 b2 -> f (Trig a1 b1) (Trig a2 b2)) b) a
 
 -- the diagonal algebra
-instance (Commutative k, Rng k) => Algebra k TrigBasis where
+instance (Commutative k, Rng k) => CombinatorialFreeAlgebra k TrigBasis where
   mult f = f' where
     fc = f Cos Cos
     fs = f Sin Sin
@@ -145,11 +145,11 @@ instance (Commutative k, Rng k) => Algebra k TrigBasis where
     f' Sin = fs
 
 -- 
-instance (Commutative k, Rng k) => UnitalAlgebra k TrigBasis where
+instance (Commutative k, Rng k) => UnitalCombinatorialFreeAlgebra k TrigBasis where
   unit = const
 
 -- The trigonometric coalgebra
-instance (Commutative k, Rng k) => Coalgebra k TrigBasis where
+instance (Commutative k, Rng k) => CombinatorialFreeCoalgebra k TrigBasis where
   comult f = f' where
      fs = f Sin
      fc = f Cos
@@ -161,20 +161,20 @@ instance (Commutative k, Rng k) => Coalgebra k TrigBasis where
 
 instance (Commutative k, Rng k) => Bialgebra k TrigBasis
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveAlgebra k TrigBasis where
+instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeAlgebra k TrigBasis where
   inv f = f' where
     afc = adjoint (f Cos)
     nfs = negate (f Sin)
     f' Cos = afc
     f' Sin = nfs
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCoalgebra k TrigBasis where
+instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeCoalgebra k TrigBasis where
   coinv = inv
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => HopfAlgebra k TrigBasis where
+instance (Commutative k, Group k, InvolutiveSemiring k) => HopfCombinatorialFreeAlgebra k TrigBasis where
   antipode = inv
 
-instance (Commutative k, Rng k) => CounitalCoalgebra k TrigBasis where
+instance (Commutative k, Rng k) => CounitalCombinatorialFreeCoalgebra k TrigBasis where
   counit f = f Cos
 
 instance (Commutative k, Rng k) => Multiplicative (Trig k) where

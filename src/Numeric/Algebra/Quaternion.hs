@@ -157,7 +157,7 @@ instance Partitionable r => Partitionable (Quaternion r) where
                   ) d) c) b) a
 
 -- | the quaternion algebra
-instance (TriviallyInvolutive r, Rng r) => Algebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeAlgebra r QuaternionBasis where
   mult f = f' where
     fe = f E E - (f I I + f J J + f K K)
     fi = f E I + f I E + f J K - f K J
@@ -168,12 +168,12 @@ instance (TriviallyInvolutive r, Rng r) => Algebra r QuaternionBasis where
     f' J = fj
     f' K = fk
              
-instance (TriviallyInvolutive r, Rng r) => UnitalAlgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => UnitalCombinatorialFreeAlgebra r QuaternionBasis where
   unit x E = x 
   unit _ _ = zero
 
 -- | the trivial diagonal coalgebra
-instance (TriviallyInvolutive r, Rng r) => Coalgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r QuaternionBasis where
   comult f = f' where
     fe = f E
     fi = f I
@@ -185,12 +185,12 @@ instance (TriviallyInvolutive r, Rng r) => Coalgebra r QuaternionBasis where
     f' K K = fk
     f' _ _ = zero
 
-instance (TriviallyInvolutive r, Rng r) => CounitalCoalgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis where
   counit f = f E + f I + f J + f K
 
 {-
 -- dual quaternion comultiplication
-instance (TriviallyInvolutive r, Rng r) => Coalgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r QuaternionBasis where
   comult f = f' where
     fe = f E
     fi = f I
@@ -217,20 +217,20 @@ instance (TriviallyInvolutive r, Rng r) => Coalgebra r QuaternionBasis where
     f' K J = fi'
     f' K K = fe'
 
-instance (TriviallyInvolutive r, Rng r) => CounitalCoalgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis where
   counit f = f E
 -}
 
 instance (TriviallyInvolutive r, Rng r)  => Bialgebra r QuaternionBasis 
 
-instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r)  => InvolutiveAlgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r)  => InvolutiveCombinatorialFreeAlgebra r QuaternionBasis where
   inv f E = f E
   inv f b = negate (f b)
 
-instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => InvolutiveCoalgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => InvolutiveCombinatorialFreeCoalgebra r QuaternionBasis where
   coinv = inv
 
-instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => HopfAlgebra r QuaternionBasis where
+instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => HopfCombinatorialFreeAlgebra r QuaternionBasis where
   antipode = inv
 
 instance (TriviallyInvolutive r, Rng r) => Multiplicative (Quaternion r) where

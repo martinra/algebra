@@ -111,19 +111,19 @@ instance Partitionable r => Partitionable (Hyper' r) where
     partitionWith (\b1 b2 -> f (Hyper' a1 b1) (Hyper' a2 b2)) b) a
 
 -- the dual hyperbolic trigonometric algebra
-instance (Commutative k, Semiring k) => Algebra k HyperBasis' where
+instance (Commutative k, Semiring k) => CombinatorialFreeAlgebra k HyperBasis' where
   mult f = f' where
     fs = f Sinh' Cosh' + f Cosh' Sinh'
     fc = f Cosh' Cosh' + f Sinh' Sinh'
     f' Sinh' = fs
     f' Cosh' = fc
 
-instance (Commutative k, Monoidal k, Semiring k) => UnitalAlgebra k HyperBasis' where
+instance (Commutative k, Monoidal k, Semiring k) => UnitalCombinatorialFreeAlgebra k HyperBasis' where
   unit _ Sinh' = zero
   unit x Cosh' = x
 
 -- the diagonal coalgebra
-instance (Commutative k, Monoidal k, Semiring k) => Coalgebra k HyperBasis' where
+instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeCoalgebra k HyperBasis' where
   comult f = f' where
      fs = f Sinh'
      fc = f Cosh'
@@ -132,22 +132,22 @@ instance (Commutative k, Monoidal k, Semiring k) => Coalgebra k HyperBasis' wher
      f' Cosh' Sinh' = zero
      f' Cosh' Cosh' = fc
 
-instance (Commutative k, Monoidal k, Semiring k) => CounitalCoalgebra k HyperBasis' where
+instance (Commutative k, Monoidal k, Semiring k) => CounitalCombinatorialFreeCoalgebra k HyperBasis' where
   counit f = f Cosh' + f Sinh'
 
 instance (Commutative k, Monoidal k, Semiring k) => Bialgebra k HyperBasis'
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveAlgebra k HyperBasis' where
+instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeAlgebra k HyperBasis' where
   inv f = f' where
     afc = adjoint (f Cosh')
     nfs = negate (f Sinh')
     f' Cosh' = afc
     f' Sinh' = nfs
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCoalgebra k HyperBasis' where
+instance (Commutative k, Group k, InvolutiveSemiring k) => InvolutiveCombinatorialFreeCoalgebra k HyperBasis' where
   coinv = inv
 
-instance (Commutative k, Group k, InvolutiveSemiring k) => HopfAlgebra k HyperBasis' where
+instance (Commutative k, Group k, InvolutiveSemiring k) => HopfCombinatorialFreeAlgebra k HyperBasis' where
   antipode = inv
 
 instance (Commutative k, Semiring k) => Multiplicative (Hyper' k) where

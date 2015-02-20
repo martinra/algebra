@@ -119,39 +119,39 @@ instance Partitionable r => Partitionable (Dual r) where
     partitionWith (\a1 a2 -> 
     partitionWith (\b1 b2 -> f (Dual a1 b1) (Dual a2 b2)) b) a
 
-instance Rng k => Algebra k DualBasis where
+instance Rng k => CombinatorialFreeAlgebra k DualBasis where
   mult f = f' where
     fe = f E E
     fd = f E D + f D E
     f' E = fe
     f' D = fd
 
-instance Rng k => UnitalAlgebra k DualBasis where
+instance Rng k => UnitalCombinatorialFreeAlgebra k DualBasis where
   unit x E = x
   unit _ _ = zero
 
 -- the trivial coalgebra
-instance Rng k => Coalgebra k DualBasis where
+instance Rng k => CombinatorialFreeCoalgebra k DualBasis where
   comult f E E = f E
   comult f D D = f D
   comult _ _ _ = zero
 
-instance Rng k => CounitalCoalgebra k DualBasis where
+instance Rng k => CounitalCombinatorialFreeCoalgebra k DualBasis where
   counit f = f E + f D
 
 instance Rng k => Bialgebra k DualBasis 
 
-instance (InvolutiveSemiring k, Rng k) => InvolutiveAlgebra k DualBasis where
+instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k DualBasis where
   inv f = f' where
     afe = adjoint (f E)
     nfd = negate (f D)
     f' E = afe
     f' D = nfd
 
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCoalgebra k DualBasis where
+instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeCoalgebra k DualBasis where
   coinv = inv
 
-instance (InvolutiveSemiring k, Rng k) => HopfAlgebra k DualBasis where
+instance (InvolutiveSemiring k, Rng k) => HopfCombinatorialFreeAlgebra k DualBasis where
   antipode = inv
 
 instance (Commutative r, Rng r) => Multiplicative (Dual r) where

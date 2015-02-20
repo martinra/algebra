@@ -1,7 +1,7 @@
 {-# LANGUAGE MultiParamTypeClasses, FlexibleInstances #-}
 module Numeric.Algebra.Division
   ( Division(..)
-  , DivisionAlgebra(..)
+  , DivisionCombinatorialFreeAlgebra(..)
   ) where
 
 import Prelude hiding ((*), recip, (/),(^))
@@ -64,10 +64,10 @@ instance (Division a, Division b, Division c, Division d, Division e) => Divisio
   (a,b,c,d,e) \\ (i,j,k,l,m) = (a\\i,b\\j,c\\k,d\\l,e\\m)
   (a,b,c,d,e) ^ n = (a^n,b^n,c^n,d^n,e^n)
 
-class UnitalAlgebra r a => DivisionAlgebra r a where
+class UnitalCombinatorialFreeAlgebra r a => DivisionCombinatorialFreeAlgebra r a where
   recipriocal :: (a -> r) -> a -> r
   -- recipriocal f = one `over` f
 
-instance (Unital r, DivisionAlgebra r a) => Division (a -> r) where
+instance (Unital r, DivisionCombinatorialFreeAlgebra r a) => Division (a -> r) where
   recip = recipriocal
 
