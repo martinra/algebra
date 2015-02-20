@@ -138,7 +138,7 @@ instance Eigenmetric r m => CombinatorialFreeCoalgebra r (BasisCoblade m) where
               = go (acc*m') (clearBit n' b)
 
 instance Eigenmetric r m => CounitalCombinatorialFreeCoalgebra r (BasisCoblade m) where
-  counit f = f (BasisCoblade zero)
+  counitCF f = f (BasisCoblade zero)
 
 -- instance Group r => InvertibleModule r BasisCoblade where
   

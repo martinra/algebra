@@ -120,8 +120,8 @@ instance (Commutative k, Semiring k) => CombinatorialFreeAlgebra k HyperBasis' w
     f' Cosh' = fc
 
 instance (Commutative k, Monoidal k, Semiring k) => UnitalCombinatorialFreeAlgebra k HyperBasis' where
-  unit _ Sinh' = zero
-  unit x Cosh' = x
+  unitCF _ Sinh' = zero
+  unitCF x Cosh' = x
 
 -- the diagonal coalgebra
 instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeCoalgebra k HyperBasis' where
@@ -134,7 +134,7 @@ instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeCoalgebra k
      f' Cosh' Cosh' = fc
 
 instance (Commutative k, Monoidal k, Semiring k) => CounitalCombinatorialFreeCoalgebra k HyperBasis' where
-  counit f = f Cosh' + f Sinh'
+  counitCF f = f Cosh' + f Sinh'
 
 instance (Commutative k, Monoidal k, Semiring k) => CombinatorialFreeBialgebra k HyperBasis'
 

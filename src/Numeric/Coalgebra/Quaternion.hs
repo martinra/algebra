@@ -170,7 +170,7 @@ instance (TriviallyInvolutive r, Semiring r) => CombinatorialFreeAlgebra r Quate
     f' K' = fk
 
 instance (TriviallyInvolutive r, Semiring r) => UnitalCombinatorialFreeAlgebra r QuaternionBasis' where
-  unit = const
+  unitCF = const
 
 
 -- | dual quaternion comultiplication
@@ -202,7 +202,7 @@ instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r Quaterni
     f' K' K' = fe'
 
 instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis' where
-  counit f = f E'
+  counitCF f = f E'
 
 instance (TriviallyInvolutive r, Rng r)  => CombinatorialFreeBialgebra r QuaternionBasis'
 

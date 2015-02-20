@@ -4,6 +4,10 @@ module Numeric.Algebra.Unital
   -- * Unital Multiplication (Multiplicative monoid)
     Unital(..)
   , product
+  -- * Unital Algebras
+  , UnitalLeftAlgebra(..)
+  , UnitalRightAlgebra(..)
+  , UnitalAlgebra(..)
   ) where
 
 import Numeric.Algebra.Class
@@ -59,3 +63,17 @@ instance (Unital a, Unital b, Unital c, Unital d) => Unital (a,b,c,d) where
 
 instance (Unital a, Unital b, Unital c, Unital d, Unital e) => Unital (a,b,c,d,e) where
   one = (one,one,one,one,one)
+
+
+class LeftAlgebra r a => UnitalLeftAlgebra r a where
+  unitL :: r -> a
+
+class RightAlgebra r a => UnitalRightAlgebra r a where
+  unitR :: r -> a
+
+class Algebra r a => UnitalAlgebra r a where
+  unit :: r -> a
+
+-- * This is undecidable, but in the combinatorial setting it is not
+-- instance (Unital r, UnitalAlgebra r a) => Unital a where
+--  one = unit one

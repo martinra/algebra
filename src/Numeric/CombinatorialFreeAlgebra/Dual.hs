@@ -128,8 +128,8 @@ instance Rng k => CombinatorialFreeAlgebra k DualBasis where
     f' D = fd
 
 instance Rng k => UnitalCombinatorialFreeAlgebra k DualBasis where
-  unit x E = x
-  unit _ _ = zero
+  unitCF x E = x
+  unitCF _ _ = zero
 
 -- the trivial coalgebra
 instance Rng k => CombinatorialFreeCoalgebra k DualBasis where
@@ -138,7 +138,7 @@ instance Rng k => CombinatorialFreeCoalgebra k DualBasis where
   comult _ _ _ = zero
 
 instance Rng k => CounitalCombinatorialFreeCoalgebra k DualBasis where
-  counit f = f E + f D
+  counitCF f = f E + f D
 
 instance Rng k => CombinatorialFreeBialgebra k DualBasis 
 

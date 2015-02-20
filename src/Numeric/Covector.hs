@@ -83,7 +83,7 @@ instance (Commutative m, CombinatorialFreeCoalgebra r m) => Commutative (Covecto
 instance CombinatorialFreeCoalgebra r m => Semiring (Covector r m)
 
 instance CounitalCombinatorialFreeCoalgebra r m => Unital (Covector r m) where
-  one = Covector counit
+  one = Covector counitCF
 
 instance (Rig r, CounitalCombinatorialFreeCoalgebra r m) => Rig (Covector r m)
 
@@ -97,13 +97,13 @@ multM :: CombinatorialFreeCoalgebra r c => c -> c -> Covector r c
 multM a b = Covector $ \k -> comult k a b
 
 unitM :: CounitalCombinatorialFreeCoalgebra r c => Covector r c
-unitM = Covector counit
+unitM = Covector counitCF
 
 comultM :: CombinatorialFreeAlgebra r a => a -> Covector r (a,a)
 comultM c = Covector $ \k -> mult (curry k) c 
 
 counitM :: UnitalCombinatorialFreeAlgebra r a => a -> Covector r ()
-counitM a = Covector $ \k -> unit (k ()) a
+counitM a = Covector $ \k -> unitCF (k ()) a
 
 convolveM :: (CombinatorialFreeAlgebra r c, CombinatorialFreeCoalgebra r a) => (c -> Covector r a) -> (c -> Covector r a) -> c -> Covector r a
 convolveM f g c = do

@@ -70,12 +70,12 @@ mulRep m n = tabulate $ mult (\b1 b2 -> index m b1 * index n b2)
 
 -- | `Unital.one` default definition
 oneRep :: (Representable m, Unital r, UnitalCombinatorialFreeAlgebra r (Rep m)) => m r
-oneRep = tabulate $ unit one
+oneRep = tabulate $ unitCF one
 
 -- | `Rig.fromNatural` default definition
 fromNaturalRep :: (UnitalCombinatorialFreeAlgebra r (Rep m), Representable m, Rig r) => Natural -> m r
-fromNaturalRep n = tabulate $ unit (fromNatural n)
+fromNaturalRep n = tabulate $ unitCF (fromNatural n)
 
 -- | `Ring.fromInteger` default definition
 fromIntegerRep :: (UnitalCombinatorialFreeAlgebra r (Rep m), Representable m, Ring r) => Integer -> m r
-fromIntegerRep n = tabulate $ unit (fromInteger n)
+fromIntegerRep n = tabulate $ unitCF (fromInteger n)

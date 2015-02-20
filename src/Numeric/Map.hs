@@ -123,7 +123,7 @@ instance Additive r => Additive (Map r b a) where
 instance CombinatorialFreeCoalgebra r m => Multiplicative (Map r b m) where
   f * g = Map $ \k b -> (f $# \a -> (g $# comult k a) b) b
 instance CounitalCombinatorialFreeCoalgebra r m => Unital (Map r b m) where
-  one = Map $ \k _ -> counit k
+  one = Map $ \k _ -> counitCF k
 
 instance CombinatorialFreeCoalgebra r m => Semiring (Map r b m)
 
@@ -180,10 +180,10 @@ multMap :: CombinatorialFreeCoalgebra r c => Map r (c,c) c
 multMap = Map $ uncurry . comult
 
 counitMap :: UnitalCombinatorialFreeAlgebra r a => Map r a ()
-counitMap = Map $ \k -> unit $ k ()
+counitMap = Map $ \k -> unitCF $ k ()
 
 unitMap :: CounitalCombinatorialFreeCoalgebra r c => Map r () c
-unitMap = Map $ \k () -> counit k
+unitMap = Map $ \k () -> counitCF k
 
 -- | convolution given an associative algebra and coassociative coalgebra
 convolveMap :: (CombinatorialFreeAlgebra r a, CombinatorialFreeCoalgebra r c) => Map r a c -> Map r a c -> Map r a c

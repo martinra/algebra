@@ -27,7 +27,7 @@ instance (Commutative r, Monoidal r, Semiring r, LocallyFiniteOrder a) => Combin
   mult f (Interval a c) = sumWith (\b -> f (Interval a b) (Interval b c)) $ range a c
   
 instance (Commutative r, Monoidal r, Semiring r, LocallyFiniteOrder a) => UnitalCombinatorialFreeAlgebra r (Interval a) where
-  unit r (Interval a b) 
+  unitCF r (Interval a b) 
     | a ~~ b = r
     | otherwise = zero
 

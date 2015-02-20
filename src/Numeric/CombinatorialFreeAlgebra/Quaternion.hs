@@ -170,8 +170,8 @@ instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeAlgebra r Quaternion
     f' K = fk
              
 instance (TriviallyInvolutive r, Rng r) => UnitalCombinatorialFreeAlgebra r QuaternionBasis where
-  unit x E = x 
-  unit _ _ = zero
+  unitCF x E = x 
+  unitCF _ _ = zero
 
 -- | the trivial diagonal coalgebra
 instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r QuaternionBasis where
@@ -187,7 +187,7 @@ instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r Quaterni
     f' _ _ = zero
 
 instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis where
-  counit f = f E + f I + f J + f K
+  counitCF f = f E + f I + f J + f K
 
 {-
 -- dual quaternion comultiplication
@@ -219,7 +219,7 @@ instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeCoalgebra r Quaterni
     f' K K = fe'
 
 instance (TriviallyInvolutive r, Rng r) => CounitalCombinatorialFreeCoalgebra r QuaternionBasis where
-  counit f = f E
+  counitCF f = f E
 -}
 
 instance (TriviallyInvolutive r, Rng r)  => CombinatorialFreeBialgebra r QuaternionBasis 

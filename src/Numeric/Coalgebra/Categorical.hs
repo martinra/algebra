@@ -22,4 +22,4 @@ instance (Commutative r, Monoidal r, Semiring r, PartialSemigroup a) => Combinat
     | otherwise = zero
 
 instance (Commutative r, Monoidal r, Semiring r, PartialMonoid a) => CounitalCombinatorialFreeCoalgebra r (Morphism a) where
-  counit f = f pzero
+  counitCF f = f pzero

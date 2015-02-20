@@ -18,69 +18,69 @@ import Prelude hiding ((*), foldr, product)
 
 -- | An associative unital algebra over a semiring, built using a free module
 class CombinatorialFreeAlgebra r a => UnitalCombinatorialFreeAlgebra r a where
-  unit :: r -> a -> r
+  unitCF :: r -> a -> r
 
 instance (Unital r, UnitalCombinatorialFreeAlgebra r a) => Unital (a -> r) where
-  one = unit one
+  one = unitCF one
 
 instance Semiring r => UnitalCombinatorialFreeAlgebra r () where
-  unit r () = r
+  unitCF r () = r
 
 -- incoherent
 -- instance UnitalCombinatorialFreeAlgebra () a where unit _ _ = ()
 -- instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b) => UnitalCombinatorialFreeAlgebra (a -> r) b where unit f b a = unit (f a) b
 
 instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b) => UnitalCombinatorialFreeAlgebra r (a,b) where
-  unit r (a,b) = unit r a * unit r b
+  unitCF r (a,b) = unitCF r a * unitCF r b
 
 instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c) => UnitalCombinatorialFreeAlgebra r (a,b,c) where
-  unit r (a,b,c) = unit r a * unit r b * unit r c
+  unitCF r (a,b,c) = unitCF r a * unitCF r b * unitCF r c
 
 instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c, UnitalCombinatorialFreeAlgebra r d) => UnitalCombinatorialFreeAlgebra r (a,b,c,d) where
-  unit r (a,b,c,d) = unit r a * unit r b * unit r c * unit r d
+  unitCF r (a,b,c,d) = unitCF r a * unitCF r b * unitCF r c * unitCF r d
 
 instance (UnitalCombinatorialFreeAlgebra r a, UnitalCombinatorialFreeAlgebra r b, UnitalCombinatorialFreeAlgebra r c, UnitalCombinatorialFreeAlgebra r d, UnitalCombinatorialFreeAlgebra r e) => UnitalCombinatorialFreeAlgebra r (a,b,c,d,e) where
-  unit r (a,b,c,d,e) = unit r a * unit r b * unit r c * unit r d * unit r e
+  unitCF r (a,b,c,d,e) = unitCF r a * unitCF r b * unitCF r c * unitCF r d * unitCF r e
 
 instance (Monoidal r, Semiring r) => UnitalCombinatorialFreeAlgebra r [a] where
-  unit r [] = r
-  unit _ _ = zero
+  unitCF r [] = r
+  unitCF _ _ = zero
 
 instance (Monoidal r, Semiring r) => UnitalCombinatorialFreeAlgebra r (Seq a) where
-  unit r a | Seq.null a = r
+  unitCF r a | Seq.null a = r
            | otherwise = zero
 
 -- A coassociative counital coalgebra over a semiring, where the module is free
 class CombinatorialFreeCoalgebra r c => CounitalCombinatorialFreeCoalgebra r c where
-  counit :: (c -> r) -> r
+  counitCF :: (c -> r) -> r
 
 instance (Unital r, UnitalCombinatorialFreeAlgebra r m) => CounitalCombinatorialFreeCoalgebra r (m -> r) where
-  counit k = k one
+  counitCF k = k one
 
 -- incoherent
--- instance (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r c) => CounitalCombinatorialFreeCoalgebra (a -> r) c where counit k a = counit (`k` a)
--- instance CounitalCombinatorialFreeCoalgebra () a where counit _ = ()
+-- instance (UnitalCombinatorialFreeAlgebra r a, CounitalCombinatorialFreeCoalgebra r c) => CounitalCombinatorialFreeCoalgebra (a -> r) c where counitCF k a = counitCF (`k` a)
+-- instance CounitalCombinatorialFreeCoalgebra () a where counitCF _ = ()
 
 instance Semiring r => CounitalCombinatorialFreeCoalgebra r () where
-  counit f = f ()
+  counitCF f = f ()
 
 instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b) => CounitalCombinatorialFreeCoalgebra r (a, b) where
-  counit k = counit $ \a -> counit $ \b -> k (a,b)
+  counitCF k = counitCF $ \a -> counitCF $ \b -> k (a,b)
 
 instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c) => CounitalCombinatorialFreeCoalgebra r (a, b, c) where
-  counit k = counit $ \a -> counit $ \b -> counit $ \c -> k (a,b,c)
+  counitCF k = counitCF $ \a -> counitCF $ \b -> counitCF $ \c -> k (a,b,c)
 
 instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c, CounitalCombinatorialFreeCoalgebra r d) => CounitalCombinatorialFreeCoalgebra r (a, b, c, d) where
-  counit k = counit $ \a -> counit $ \b -> counit $ \c -> counit $ \d -> k (a,b,c,d)
+  counitCF k = counitCF $ \a -> counitCF $ \b -> counitCF $ \c -> counitCF $ \d -> k (a,b,c,d)
 
 instance (CounitalCombinatorialFreeCoalgebra r a, CounitalCombinatorialFreeCoalgebra r b, CounitalCombinatorialFreeCoalgebra r c, CounitalCombinatorialFreeCoalgebra r d, CounitalCombinatorialFreeCoalgebra r e) => CounitalCombinatorialFreeCoalgebra r (a, b, c, d, e) where
-  counit k = counit $ \a -> counit $ \b -> counit $ \c -> counit $ \d -> counit $ \e -> k (a,b,c,d,e)
+  counitCF k = counitCF $ \a -> counitCF $ \b -> counitCF $ \c -> counitCF $ \d -> counitCF $ \e -> k (a,b,c,d,e)
 
 instance Semiring r => CounitalCombinatorialFreeCoalgebra r [a] where
-  counit k = k []
+  counitCF k = k []
 
 instance Semiring r => CounitalCombinatorialFreeCoalgebra r (Seq a) where
-  counit k = k (Seq.empty)
+  counitCF k = k (Seq.empty)
 
 -- | A bialgebra is both a unital algebra and counital coalgebra 
 -- where the `mult` and `unit` are compatible in some sense with 

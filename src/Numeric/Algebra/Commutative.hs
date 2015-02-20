@@ -50,3 +50,7 @@ instance ( Commutative a
          , Commutative d
          , Commutative e
          ) => Commutative (a,b,c,d,e)
+
+
+class (Algebra r a, Commutative r, Commutative a) => CommutativeAlgebra r a
+instance (Algebra r a, Commutative r, Commutative a) => CommutativeAlgebra r a

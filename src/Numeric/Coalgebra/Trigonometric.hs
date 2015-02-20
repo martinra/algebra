@@ -147,7 +147,7 @@ instance (Commutative k, Rng k) => CombinatorialFreeAlgebra k TrigBasis where
 
 -- 
 instance (Commutative k, Rng k) => UnitalCombinatorialFreeAlgebra k TrigBasis where
-  unit = const
+  unitCF = const
 
 -- The trigonometric coalgebra
 instance (Commutative k, Rng k) => CombinatorialFreeCoalgebra k TrigBasis where
@@ -176,7 +176,7 @@ instance (Commutative k, Group k, InvolutiveSemiring k) => HopfCombinatorialFree
   antipode = inv
 
 instance (Commutative k, Rng k) => CounitalCombinatorialFreeCoalgebra k TrigBasis where
-  counit f = f Cos
+  counitCF f = f Cos
 
 instance (Commutative k, Rng k) => Multiplicative (Trig k) where
   (*) = mulRep

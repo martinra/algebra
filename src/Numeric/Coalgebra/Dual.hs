@@ -127,7 +127,7 @@ instance Semiring k => CombinatorialFreeAlgebra k DualBasis' where
     f' D = fd
 
 instance Semiring k => UnitalCombinatorialFreeAlgebra k DualBasis' where
-  unit = const
+  unitCF = const
 
 -- the trivial coalgebra
 instance Rng k => CombinatorialFreeCoalgebra k DualBasis' where
@@ -140,7 +140,7 @@ instance Rng k => CombinatorialFreeCoalgebra k DualBasis' where
      f' D D = zero
 
 instance Rng k => CounitalCombinatorialFreeCoalgebra k DualBasis' where
-  counit f = f E
+  counitCF f = f E
 
 instance Rng k => CombinatorialFreeBialgebra k DualBasis' 
 

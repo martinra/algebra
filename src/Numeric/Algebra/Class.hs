@@ -15,6 +15,10 @@ module Numeric.Algebra.Class
   , Monoidal(..)
   , sum
   , sinnumIdempotent
+  -- * Left and Right Algebras
+  , LeftAlgebra
+  , RightAlgebra
+  , Algebra
   ) where
 
 import Data.Foldable hiding (sum, concat)
@@ -452,3 +456,12 @@ instance (Monoidal a, Monoidal b, Monoidal c, Monoidal d, Monoidal e) => Monoida
   zero = (zero,zero,zero,zero,zero)
   sinnum n (a,b,c,d,e) = (sinnum n a, sinnum n b, sinnum n c, sinnum n d, sinnum n e)
 
+
+class (LeftModule r a, Semiring a) => LeftAlgebra r a
+instance (LeftModule r a, Semiring a) => LeftAlgebra r a
+
+class (RightModule r a, Semiring a) => RightAlgebra r a
+instance (RightModule r a, Semiring a) => RightAlgebra r a
+
+class (Module r a, Semiring a) => Algebra r a
+instance (Module r a, Semiring a) => Algebra r a

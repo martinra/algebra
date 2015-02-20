@@ -121,7 +121,7 @@ instance Semiring k => CombinatorialFreeAlgebra k HyperBasis where
     f' Cosh = fc
 
 instance Semiring k => UnitalCombinatorialFreeAlgebra k HyperBasis where
-  unit = const
+  unitCF = const
 
 -- | the hyperbolic trigonometric coalgebra
 instance (Commutative k, Semiring k) => CombinatorialFreeCoalgebra k HyperBasis where
@@ -134,7 +134,7 @@ instance (Commutative k, Semiring k) => CombinatorialFreeCoalgebra k HyperBasis 
      f' Cosh Cosh = fc
 
 instance (Commutative k, Semiring k) => CounitalCombinatorialFreeCoalgebra k HyperBasis where
-  counit f = f Cosh
+  counitCF f = f Cosh
 
 instance (Commutative k, Semiring k) => CombinatorialFreeBialgebra k HyperBasis
 

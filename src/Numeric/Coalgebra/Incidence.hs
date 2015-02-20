@@ -28,7 +28,7 @@ instance (Eq a, Commutative r, Monoidal r, Semiring r) => CombinatorialFreeCoalg
     | otherwise = zero
 
 instance (Eq a, Bounded a, Commutative r, Monoidal r, Semiring r) => CounitalCombinatorialFreeCoalgebra r (Interval' a) where
-  counit f = f (Interval' minBound maxBound)
+  counitCF f = f (Interval' minBound maxBound)
   
 zeta' :: Unital r => Interval' a -> r
 zeta' = const one

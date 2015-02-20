@@ -142,8 +142,8 @@ instance Rng k => CombinatorialFreeAlgebra k ComplexBasis where
     f' I = fi
 
 instance Rng k => UnitalCombinatorialFreeAlgebra k ComplexBasis where
-  unit x E = x
-  unit _ _ = zero
+  unitCF x E = x
+  unitCF _ _ = zero
 
 -- the trivial coalgebra
 instance Rng k => CombinatorialFreeCoalgebra k ComplexBasis where
@@ -152,7 +152,7 @@ instance Rng k => CombinatorialFreeCoalgebra k ComplexBasis where
   comult _ _ _ = zero
 
 instance Rng k => CounitalCombinatorialFreeCoalgebra k ComplexBasis where
-  counit f = f E + f I
+  counitCF f = f E + f I
 
 instance Rng k => CombinatorialFreeBialgebra k ComplexBasis 
 
