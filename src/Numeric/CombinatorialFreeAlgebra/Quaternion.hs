@@ -5,7 +5,14 @@
            , DeriveDataTypeable
            , TypeOperators #-}
 module Numeric.CombinatorialFreeAlgebra.Quaternion 
-  ( QuaternionBasis(..)
+  ( Distinguished(..)
+  , Complicated(..)
+  , Hamiltonian(..)
+  , QuaternionBasis(..)
+  , Quaternion(..)
+  , complicate
+  , vectorPart
+  , scalarPart
   ) where
 
 import Control.Applicative
@@ -36,6 +43,16 @@ instance Hamiltonian QuaternionBasis where
   j = J
   k = K
 
+instance Rig r => Distinguished (Quaternion r) where
+  e = Quaternion one zero zero zero
+
+instance Rig r => Complicated (Quaternion r) where
+  i = Quaternion zero one zero zero
+
+instance Rig r => Hamiltonian (Quaternion r) where
+  j = Quaternion zero zero one zero
+  k = Quaternion one zero zero one 
+
 instance Rig r => Distinguished (QuaternionBasis -> r) where
   e E = one 
   e _ = zero
@@ -54,6 +71,8 @@ instance Rig r => Hamiltonian (QuaternionBasis -> r) where
 -- quaternion basis
 data QuaternionBasis = E | I | J | K deriving (Eq,Ord,Enum,Read,Show,Bounded,Ix,Data,Typeable)
 
+data Quaternion a = Quaternion a a a a deriving (Eq,Show,Read,Data,Typeable)
+
 instance Representable Quaternion where
   type Rep Quaternion = QuaternionBasis
   tabulate f = Quaternion (f E) (f I) (f J) (f K)
@@ -62,9 +81,80 @@ instance Representable Quaternion where
   index (Quaternion _ _ c _) J = c
   index (Quaternion _ _ _ d) K = d
 
+instance Distributive Quaternion where
+  distribute = distributeRep 
+
+instance Functor Quaternion where
+  fmap = fmapRep
+
+instance Apply Quaternion where
+  (<.>) = apRep
+
+instance Applicative Quaternion where
+  pure = pureRep
+  (<*>) = apRep 
+
+instance Bind Quaternion where
+  (>>-) = bindRep
+
+instance Monad Quaternion where
+  return = pureRep
+  (>>=) = bindRep
+
 instance MonadReader QuaternionBasis Quaternion where
   ask = askRep
   local = localRep
+
+instance Foldable Quaternion where
+  foldMap f (Quaternion a b c d) = 
+    f a `mappend` f b `mappend` f c `mappend` f d
+
+instance Traversable Quaternion where
+  traverse f (Quaternion a b c d) = 
+    Quaternion <$> f a <*> f b <*> f c <*> f d
+
+instance Foldable1 Quaternion where
+  foldMap1 f (Quaternion a b c d) = 
+    f a <> f b <> f c <> f d
+
+instance Traversable1 Quaternion where
+  traverse1 f (Quaternion a b c d) = 
+    Quaternion <$> f a <.> f b <.> f c <.> f d
+
+instance Additive r => Additive (Quaternion r) where
+  (+) = addRep 
+  sinnum1p = sinnum1pRep
+
+instance LeftModule r s => LeftModule r (Quaternion s) where
+  r .* Quaternion a b c d =
+    Quaternion (r .* a) (r .* b) (r .* c) (r .* d)
+
+instance RightModule r s => RightModule r (Quaternion s) where
+  Quaternion a b c d *. r =
+    Quaternion (a *. r) (b *. r) (c *. r) (d *. r)
+
+instance Monoidal r => Monoidal (Quaternion r) where
+  zero = zeroRep
+  sinnum = sinnumRep
+
+instance Group r => Group (Quaternion r) where
+  (-) = minusRep
+  negate = negateRep
+  subtract = subtractRep
+  times = timesRep
+
+instance Abelian r => Abelian (Quaternion r)
+
+instance Idempotent r => Idempotent (Quaternion r)
+
+instance Partitionable r => Partitionable (Quaternion r) where
+  partitionWith f (Quaternion a b c d) = id =<<
+    partitionWith (\a1 a2 -> id =<< 
+    partitionWith (\b1 b2 -> id =<< 
+    partitionWith (\c1 c2 -> 
+    partitionWith (\d1 d2 -> f (Quaternion a1 b1 c1 d1) 
+                               (Quaternion a2 b2 c2 d2)
+                  ) d) c) b) a
 
 -- | the quaternion algebra
 instance (TriviallyInvolutive r, Rng r) => CombinatorialFreeAlgebra r QuaternionBasis where
@@ -143,6 +233,30 @@ instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => InvolutiveCombi
 instance (TriviallyInvolutive r, InvolutiveSemiring r, Rng r) => HopfCombinatorialFreeAlgebra r QuaternionBasis where
   antipode = inv
 
+instance (TriviallyInvolutive r, Rng r) => Multiplicative (Quaternion r) where
+  (*) = mulRep
+
+instance (TriviallyInvolutive r, Rng r) => Semiring (Quaternion r)
+
+instance (TriviallyInvolutive r, Ring r) => Unital (Quaternion r) where
+  one = oneRep
+
+instance (TriviallyInvolutive r, Ring r) => Rig (Quaternion r) where
+  fromNatural n = Quaternion (fromNatural n) zero zero zero
+
+instance (TriviallyInvolutive r, Ring r) => Ring (Quaternion r) where
+  fromInteger n = Quaternion (fromInteger n) zero zero zero
+
+instance ( TriviallyInvolutive r, Rng r) => LeftModule (Quaternion r) (Quaternion r) where 
+  (.*) = (*)
+instance (TriviallyInvolutive r, Rng r) => RightModule (Quaternion r) (Quaternion r) where 
+  (*.) = (*)
+
+instance (TriviallyInvolutive r, Rng r) => InvolutiveMultiplication (Quaternion r) where
+  -- without trivial involution, multiplication fails associativity, and we'd need to 
+  -- support weaker multiplicative properties like Alternative and PowerAssociative
+  adjoint (Quaternion a b c d) = Quaternion a (negate b) (negate c) (negate d)
+
 -- | Cayley-Dickson quaternion isomorphism (one way)
 complicate :: Complicated c => QuaternionBasis -> (c,c)
 complicate E = (e, e)
@@ -155,3 +269,10 @@ scalarPart f = index f E
 
 vectorPart :: (Representable f, Rep f ~ QuaternionBasis) => f r -> (r,r,r)
 vectorPart f = (index f I, index f J, index f K)
+
+instance (TriviallyInvolutive r, Rng r) => Quadrance r (Quaternion r) where
+  quadrance n = scalarPart (adjoint n * n)
+
+instance (TriviallyInvolutive r, Ring r, Division r) => Division (Quaternion r) where
+  recip q@(Quaternion a b c d) = Quaternion (qq \\ a) (qq \\ b) (qq \\ c) (qq \\ d)
+    where qq = quadrance q

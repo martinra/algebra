@@ -1,4 +1,4 @@
-module Numeric.Algebra.Dual.Class
+module Numeric.CombinatorialFreeAlgebra.Dual.Class
   ( Infinitesimal(..)
   ) where
 

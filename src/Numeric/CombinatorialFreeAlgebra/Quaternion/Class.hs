@@ -1,4 +1,4 @@
-module Numeric.Algebra.Quaternion.Class
+module Numeric.CombinatorialFreeAlgebra.Quaternion.Class
   ( Hamiltonian(..)
   ) where
 

@@ -1,4 +1,4 @@
-module Numeric.Algebra.Complex.Class
+module Numeric.CombinatorialFreeAlgebra.Complex.Class
   ( Complicated(..)
   ) where
 
