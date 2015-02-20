@@ -2,7 +2,6 @@
 module Numeric.Algebra.Dual
   ( Distinguished(..)
   , Infinitesimal(..)
-  , DualBasis(..)
   , Dual(..)
   ) where
 
@@ -24,14 +23,7 @@ import Numeric.Algebra.Dual.Class
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger,recip)
 
 -- | dual number basis, D^2 = 0. D /= 0.
-data DualBasis = E | D deriving (Eq,Ord,Show,Read,Enum,Ix,Bounded,Data,Typeable)
 data Dual a = Dual a a deriving (Eq,Show,Read,Data,Typeable)
-
-instance Distinguished DualBasis where
-  e = E
-
-instance Infinitesimal DualBasis where
-  d = D
 
 instance Rig r => Distinguished (Dual r) where
   e = Dual one zero
@@ -39,21 +31,6 @@ instance Rig r => Distinguished (Dual r) where
 instance Rig r => Infinitesimal (Dual r) where
   d = Dual zero one
   
-instance Rig r => Distinguished (DualBasis -> r) where
-  e E = one
-  e _ = zero
-
-instance Rig r => Infinitesimal (DualBasis -> r) where
-  d D = one
-  d _       = zero 
-
-
-instance Representable Dual where
-  type Rep Dual = DualBasis
-  tabulate f = Dual (f E) (f D)
-  index (Dual a _ ) E = a
-  index (Dual _ b ) D = b
-
 instance Distributive Dual where
   distribute = distributeRep 
 
@@ -73,10 +50,6 @@ instance Bind Dual where
 instance Monad Dual where
   return = pureRep
   (>>=) = bindRep
-
-instance MonadReader DualBasis Dual where
-  ask = askRep
-  local = localRep
 
 instance Foldable Dual where
   foldMap f (Dual a b) = f a `mappend` f b
@@ -118,41 +91,6 @@ instance Partitionable r => Partitionable (Dual r) where
   partitionWith f (Dual a b) = id =<<
     partitionWith (\a1 a2 -> 
     partitionWith (\b1 b2 -> f (Dual a1 b1) (Dual a2 b2)) b) a
-
-instance Rng k => CombinatorialFreeAlgebra k DualBasis where
-  mult f = f' where
-    fe = f E E
-    fd = f E D + f D E
-    f' E = fe
-    f' D = fd
-
-instance Rng k => UnitalCombinatorialFreeAlgebra k DualBasis where
-  unit x E = x
-  unit _ _ = zero
-
--- the trivial coalgebra
-instance Rng k => CombinatorialFreeCoalgebra k DualBasis where
-  comult f E E = f E
-  comult f D D = f D
-  comult _ _ _ = zero
-
-instance Rng k => CounitalCombinatorialFreeCoalgebra k DualBasis where
-  counit f = f E + f D
-
-instance Rng k => CombinatorialFreeBialgebra k DualBasis 
-
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k DualBasis where
-  inv f = f' where
-    afe = adjoint (f E)
-    nfd = negate (f D)
-    f' E = afe
-    f' D = nfd
-
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeCoalgebra k DualBasis where
-  coinv = inv
-
-instance (InvolutiveSemiring k, Rng k) => HopfCombinatorialFreeAlgebra k DualBasis where
-  antipode = inv
 
 instance (Commutative r, Rng r) => Multiplicative (Dual r) where
   (*) = mulRep

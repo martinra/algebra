@@ -4,7 +4,7 @@
            , DeriveDataTypeable
            #-}
 
-module Numeric.Algebra.Incidence
+module Numeric.CombinatorialFreeAlgebra.Incidence
   ( Interval(..)
   , zeta
   , moebius

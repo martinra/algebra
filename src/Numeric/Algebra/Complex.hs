@@ -7,7 +7,6 @@
 module Numeric.Algebra.Complex
   ( Distinguished(..)
   , Complicated(..)
-  , ComplexBasis(..)
   , Complex(..)
   , realPart
   , imagPart
@@ -33,40 +32,14 @@ import Numeric.Algebra.Quaternion.Class
 import Prelude hiding ((-),(+),(*),negate,subtract, fromInteger,recip)
 
 -- complex basis
-data ComplexBasis = E | I deriving (Eq,Ord,Show,Read,Enum,Ix,Bounded,Data,Typeable)
 data Complex a = Complex a a deriving (Eq,Show,Read,Data,Typeable)
 
-realPart :: (Representable f, Rep f ~ ComplexBasis) => f a -> a
-realPart f = index f E 
-
-imagPart :: (Representable f, Rep f ~ ComplexBasis) => f a -> a
-imagPart f = index f I
-
-instance Distinguished ComplexBasis where
-  e = E
-  
-instance Complicated ComplexBasis where
-  i = I
 
 instance Rig r => Distinguished (Complex r) where
   e = Complex one zero
 
 instance Rig r => Complicated (Complex r) where
   i = Complex zero one
-
-instance Rig r => Distinguished (ComplexBasis -> r) where
-  e E = one
-  e _ = zero
-  
-instance Rig r => Complicated (ComplexBasis -> r) where
-  i I = one
-  i _ = zero 
-
-instance Representable Complex where
-  type Rep Complex = ComplexBasis
-  tabulate f = Complex (f E) (f I)
-  index (Complex a _ ) E = a
-  index (Complex _ b ) I = b
 
 instance Distributive Complex where
   distribute = distributeRep 
@@ -87,10 +60,6 @@ instance Bind Complex where
 instance Monad Complex where
   return = pureRep
   (>>=) = bindRep
-
-instance MonadReader ComplexBasis Complex where
-  ask = askRep
-  local = localRep
 
 instance Foldable Complex where
   foldMap f (Complex a b) = f a `mappend` f b
@@ -133,41 +102,6 @@ instance Partitionable r => Partitionable (Complex r) where
     partitionWith (\a1 a2 -> 
     partitionWith (\b1 b2 -> f (Complex a1 b1) (Complex a2 b2)) b) a
 
-instance Rng k => CombinatorialFreeAlgebra k ComplexBasis where
-  mult f = f' where
-    fe = f E E - f I I
-    fi = f E I + f I E
-    f' E = fe
-    f' I = fi
-
-instance Rng k => UnitalCombinatorialFreeAlgebra k ComplexBasis where
-  unit x E = x
-  unit _ _ = zero
-
--- the trivial coalgebra
-instance Rng k => CombinatorialFreeCoalgebra k ComplexBasis where
-  comult f E E = f E
-  comult f I I = f I
-  comult _ _ _ = zero
-
-instance Rng k => CounitalCombinatorialFreeCoalgebra k ComplexBasis where
-  counit f = f E + f I
-
-instance Rng k => CombinatorialFreeBialgebra k ComplexBasis 
-
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeAlgebra k ComplexBasis where
-  inv f = f' where
-    afe = adjoint (f E)
-    nfi = negate (f I)
-    f' E = afe
-    f' I = nfi
-
-instance (InvolutiveSemiring k, Rng k) => InvolutiveCombinatorialFreeCoalgebra k ComplexBasis where
-  coinv = inv
-
-instance (InvolutiveSemiring k, Rng k) => HopfCombinatorialFreeAlgebra k ComplexBasis where
-  antipode = inv
-
 instance (Commutative r, Rng r) => Multiplicative (Complex r) where
   (*) = mulRep
 
@@ -198,11 +132,3 @@ instance (Commutative r, Rng r, InvolutiveSemiring r) => Quadrance r (Complex r)
 instance (Commutative r, InvolutiveSemiring r, DivisionRing r) => Division (Complex r) where
   recip q@(Complex a b) = Complex (qq \\ a) (qq \\ b)
     where qq = quadrance q
-
--- | half of the Cayley-Dickson quaternion isomorphism 
-uncomplicate :: Hamiltonian q => ComplexBasis -> ComplexBasis -> q
-uncomplicate E E = e
-uncomplicate I E = i
-uncomplicate E I = j
-uncomplicate I I = k
-
